@@ -32,9 +32,6 @@ p {
     width: 20rem;
 }
 
-section{
-    padding: 1rem;
-}
 .fullPage {
     display: flex;
     flex-direction: row;
