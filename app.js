@@ -143,7 +143,7 @@ fetch(apiUrl)
             .enter()
             .append("circle")
             .attr("r", d => bubbleScale(d.renewable))
-            .attr("fill", d => d.renewable === d3.max(energyObjects, e => e.renewable) ? "#409FC6" : "grey")
+            .attr("fill", d => d.renewable === d3.max(energyObjects, e => e.renewable) ? "#98aeeb" : "grey")
             .on("mouseover", function (event, d) {
                 tooltip.style("display", "inline-block")
                     .html(`${d.country} <br> ${d.renewable} kwh`)
@@ -174,7 +174,6 @@ fetch(apiUrl)
             d.fx = null;
             d.fy = null;
         }
-
 
     })
     .catch(error => {
