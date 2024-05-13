@@ -11,7 +11,7 @@ const h = 450;
 const pad = 40;
 let dur = 800
 
-const bubbbleW = 700;
+const bubbbleW = 1000;
 const bubbleH = 700;
 
 
@@ -90,7 +90,44 @@ fetch(apiUrl)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //GRAPH/CHART FOR DATA VIZ 2 GOES HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
 
 
 
@@ -110,7 +147,7 @@ fetch(apiUrl)
         //Creating scales for bubbles
         const bubbleScale = d3.scaleLinear()
             .domain([0, d3.max(energyObjects, d => d.renewable)])
-            .range([1, 150]);
+            .range([1, 220]);
 
         //Tooltip setup
         const tooltip = d3.select("#container3").append("div")
@@ -143,7 +180,7 @@ fetch(apiUrl)
             .enter()
             .append("circle")
             .attr("r", d => bubbleScale(d.renewable))
-            .attr("fill", d => d.renewable === d3.max(energyObjects, e => e.renewable) ? "#98aeeb" : "grey")
+            .attr("fill", d => d.country === "Sweden" ? "#98aeeb" : "grey")
             .on("mouseover", function (event, d) {
                 tooltip.style("display", "inline-block")
                     .html(`${d.country} <br> ${d.renewable} kwh`)
@@ -153,7 +190,7 @@ fetch(apiUrl)
             .on("mouseout", function () {
                 tooltip.style("display", "none");
             })
-            .call(d3.drag()  // Optional: Add drag interactions
+            .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
@@ -186,5 +223,5 @@ function Energy(fossil, nuclear, renewable, total, country, access) {
     this.renewable = renewable;
     this.total = total;
     this.country = country;
-    this.access = access
+    this.access = access;
 }

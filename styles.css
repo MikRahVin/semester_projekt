@@ -39,7 +39,7 @@ p {
 }
 
 .infoSection{
-    height: 50vh;
+    height: 40vh;
     width: 100%;
     background-color: #c7d3f3;
 }
@@ -91,7 +91,7 @@ p {
 }
 
 #container3{
-    width: 80%;
+    width: 80vw;
     height: 80vh;
 }
 
@@ -99,4 +99,5 @@ p {
     background-color: whitesmoke;
     box-shadow: 2px 2px 10px #d1d1d1;
     align-content: center;
+    border-radius: 5px;
 }
