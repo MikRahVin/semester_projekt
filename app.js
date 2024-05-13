@@ -27,11 +27,78 @@ const svg1 = d3.select("#container1")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
 // appending svg element to container2
 const svg2 = d3.select("#container2")
     .append("svg")
     .attr("width", w)
     .attr("height", h);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,6 +173,20 @@ fetch(apiUrl)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //GRAPH/CHART FOR DATA VIZ 2 GOES HERE
 
 
@@ -121,7 +202,16 @@ fetch(apiUrl)
 
 
 
-        
+
+
+
+
+
+
+
+
+
+
 
 
 
