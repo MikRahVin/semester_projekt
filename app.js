@@ -54,7 +54,7 @@ const svg1 = d3.select("#container1")
 
 
 
-    
+
 
 
 
@@ -125,6 +125,7 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
+        console.log(data)
 
         let energyObjects = [];
         for (let i in data) {
@@ -229,78 +230,84 @@ fetch(apiUrl)
 
         // BUBBLE CHART FOR DATA VIZ 3 GOES HERE
         //append svg for bubblechart
+
+        let continentsObj = {
+            "name": "continents",
+            "children": [{
+                "name": "Africa",
+                "value": "",
+                "countries": [
+
+                ]
+            },
+            {
+                "name": "Asia",
+                "value": "",
+                "countries": [
+
+                ]
+            },
+            {
+                "name": "Europe",
+                "value": "",
+                "countries": [
+
+                ]
+            },
+            {
+                "name": "North America",
+                "value": "",
+                "countries": [
+
+                ]
+            },
+            {
+                "name": "South America",
+                "value": "",
+                "countries": [
+
+                ]
+            },
+            {
+                "name": "Oceania",
+                "value": "",
+                "countries": [
+
+                ]
+            }
+            ]
+        }
+
+     //populating continentsObj using CountryInsert.
+        data.forEach(country => {
+            // Calculate total energy and renewable energy
+            let totalEnergy = country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity;
+            let renewable = country.renewable_electricity;
+    
+            // Create a new CountryInsert object
+            let countryObj = new CountryInsert(country.continent, country.country, totalEnergy, renewable);
+    
+            // Find the right continent and add the country
+            let continentFound = continentsObj.children.find(continent => continent.name === country.continent);
+            if (continentFound) {
+                continentFound.countries.push(countryObj);
+            }
+        });
+
+
+     console.log(continentsObj)
+
+
+
+
         const svg3 = d3.select("#container3")
             .append("svg")
             .attr("width", bubbbleW)
             .attr("height", bubbleH);
 
-        //Creating scales for bubbles
-        const bubbleScale = d3.scaleLinear()
-            .domain([0, d3.max(energyObjects, d => d.renewable)])
-            .range([1, 220]);
-
-        //Tooltip setup
-        const tooltip = d3.select("#container3").append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("background-color", "#fff")
-            .style("border", "1px solid #ddd")
-            .style("padding", "5px")
-            .style("display", "none")
-            .style("pointer-events", "none");
-
-        const simulation = d3.forceSimulation(energyObjects)
-            .force("charge", d3.forceManyBody().strength(20))  // Repulsive force among nodes
-            .force("center", d3.forceCenter(w / 2, h / 2))  // Centering force
-            .force("collision", d3.forceCollide().radius(d => bubbleScale(d.renewable) + 1))
-            .on("tick", ticked);
 
 
 
-        function ticked() {
-            bubbles
-                .attr("cx", d => Math.max(bubbleScale(d.renewable), Math.min(bubbbleW - bubbleScale(d.renewable), d.x)))
-                .attr("cy", d => Math.max(bubbleScale(d.renewable), Math.min(bubbleH - bubbleScale(d.renewable), d.y)));
-        }
-
-        //creating the bubbles
-
-        const bubbles = svg3.selectAll("circle")
-            .data(energyObjects)
-            .enter()
-            .append("circle")
-            .attr("r", d => bubbleScale(d.renewable))
-            .attr("fill", d => d.country === "Sweden" ? "#98aeeb" : "grey")
-            .on("mouseover", function (event, d) {
-                tooltip.style("display", "inline-block")
-                    .html(`${d.country} <br> ${d.renewable} kwh`)
-                    .style("left", (event.pageX + 10) + "px")
-                    .style("top", (event.pageY - 10) + "px");
-            })
-            .on("mouseout", function () {
-                tooltip.style("display", "none");
-            })
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
-
-        function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-        }
-
-        function dragged(event, d) {
-            d.fx = event.x;
-            d.fy = event.y;
-        }
-
-        function dragended(event, d) {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        }
 
     })
     .catch(error => {
@@ -314,4 +321,11 @@ function Energy(fossil, nuclear, renewable, total, country, access) {
     this.total = total;
     this.country = country;
     this.access = access;
+}
+
+function CountryInsert(continent, country, totalEnergy, renewable){
+    this.continent = continent;
+    this.country = country;
+    this.totalEnergy = totalEnergy;
+    this.renewable = renewable; 
 }
