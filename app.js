@@ -11,8 +11,8 @@ const h = 450;
 const pad = 40;
 let dur = 800
 
-const bubbbleW = 1000;
-const bubbleH = 700;
+const bubbleW = 800;
+const bubbleH = 800;
 
 
 
@@ -54,7 +54,7 @@ const svg1 = d3.select("#container1")
 
 
 
-    
+
 
 
 
@@ -125,6 +125,7 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
+        console.log(data)
 
         let energyObjects = [];
         for (let i in data) {
@@ -139,7 +140,7 @@ fetch(apiUrl)
             energyObjects.push(energy);
         }
         console.log(energyObjects)
-        // her skal kode skrives
+
 
 
 
@@ -229,78 +230,162 @@ fetch(apiUrl)
 
         // BUBBLE CHART FOR DATA VIZ 3 GOES HERE
         //append svg for bubblechart
-        const svg3 = d3.select("#container3")
-            .append("svg")
-            .attr("width", bubbbleW)
-            .attr("height", bubbleH);
 
-        //Creating scales for bubbles
-        const bubbleScale = d3.scaleLinear()
-            .domain([0, d3.max(energyObjects, d => d.renewable)])
-            .range([1, 220]);
+        let continentsObj = {
+            "name": "continents",
+            "children": [{
+                "name": "Africa",
+                "value": "",
+                "children": [
 
-        //Tooltip setup
-        const tooltip = d3.select("#container3").append("div")
-            .attr("class", "tooltip")
-            .style("position", "absolute")
-            .style("background-color", "#fff")
-            .style("border", "1px solid #ddd")
-            .style("padding", "5px")
-            .style("display", "none")
-            .style("pointer-events", "none");
+                ]
+            },
+            {
+                "name": "Asia",
+                "value": "",
+                "children": [
 
-        const simulation = d3.forceSimulation(energyObjects)
-            .force("charge", d3.forceManyBody().strength(20))  // Repulsive force among nodes
-            .force("center", d3.forceCenter(w / 2, h / 2))  // Centering force
-            .force("collision", d3.forceCollide().radius(d => bubbleScale(d.renewable) + 1))
-            .on("tick", ticked);
+                ]
+            },
+            {
+                "name": "Europe",
+                "value": "",
+                "children": [
 
+                ]
+            },
+            {
+                "name": "North America",
+                "value": "",
+                "children": [
 
+                ]
+            },
+            {
+                "name": "South America",
+                "value": "",
+                "children": [
 
-        function ticked() {
-            bubbles
-                .attr("cx", d => Math.max(bubbleScale(d.renewable), Math.min(bubbbleW - bubbleScale(d.renewable), d.x)))
-                .attr("cy", d => Math.max(bubbleScale(d.renewable), Math.min(bubbleH - bubbleScale(d.renewable), d.y)));
+                ]
+            },
+            {
+                "name": "Oceania",
+                "value": "",
+                "children": [
+
+                ]
+            }
+            ]
         }
 
-        //creating the bubbles
+        //populating continentsObj using CountryInsert.
+        data.forEach(country => {
+            // Calculate total energy and renewable energy
+            let totalEnergy = country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity;
+            let renewable = country.renewable_electricity;
 
-        const bubbles = svg3.selectAll("circle")
-            .data(energyObjects)
-            .enter()
-            .append("circle")
-            .attr("r", d => bubbleScale(d.renewable))
-            .attr("fill", d => d.country === "Sweden" ? "#98aeeb" : "grey")
-            .on("mouseover", function (event, d) {
-                tooltip.style("display", "inline-block")
-                    .html(`${d.country} <br> ${d.renewable} kwh`)
-                    .style("left", (event.pageX + 10) + "px")
-                    .style("top", (event.pageY - 10) + "px");
-            })
-            .on("mouseout", function () {
-                tooltip.style("display", "none");
-            })
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
+            // Create a new CountryInsert object
+            let countryObj = new CountryInsert(country.continent, country.country, totalEnergy, renewable);
 
-        function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
+            // Find the right continent and add the country
+            let continentFound = continentsObj.children.find(continent => continent.name === country.continent);
+            if (continentFound) {
+                continentFound.children.push(countryObj);
+            }
+        });
+
+
+        console.log(continentsObj)
+
+
+        continentsObj.children.forEach(continent => {
+            const total = continent.children.reduce((acc, country) => acc + country.value, 0);
+            const average = total / continent.children.length;
+            continent.value = average;
+        });
+
+
+        const format = d3.format(",d");
+
+        const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+        const pack = data => d3.pack()
+            .size([bubbleW, bubbleH]) // Check if these variables are defined correctly as bubbleW and bubbleH
+            .padding(3)
+            (d3.hierarchy(data)
+                .sum(d => d.value) // Make sure every node has a 'value' field
+                .sort((a, b) => b.value - a.value));
+
+
+        const root = pack(continentsObj);
+        let focus = root;
+        let view;
+
+        console.log("Root values:", root.x, root.y, root.r); // Check these values
+
+
+        const svg3 = d3.select("#container3").append("svg")
+            .attr("viewBox", `-${bubbleW / 2} -${bubbleH / 2} ${bubbleW} ${bubbleH}`)
+            .style("display", "block")
+            .style("margin", "0 -14px")
+            .style("background", "whitesmoke")
+            .style("cursor", "pointer")
+            .on("click", (event) => zoom(event, root));
+
+        const node = svg3.append("g")
+            .selectAll("circle")
+            .data(root.descendants().slice(1))
+            .join("circle")
+            .attr("fill", d => d.children ? "#64a4ce" : "#b7d7ea")
+            .attr("pointer-events", d => !d.children ? "none" : null)
+            .on("mouseover", function () { d3.select(this).attr("stroke", "#274c77"); })
+            .on("mouseout", function () { d3.select(this).attr("stroke", null); })
+            .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
+
+        const label = svg3.append("g")
+            .style("font-size", "10px")
+            .attr("pointer-events", "none")
+            .attr("text-anchor", "middle")
+            .selectAll("text")
+            .data(root.descendants())
+            .join("text")
+            .style("fill-opacity", d => d.parent === root ? 1 : 0)
+            .style("display", d => d.parent === root ? "inline" : "none")
+            .text(d => d.data.name);
+
+        zoomTo([root.x, root.y, root.r * 2]);
+
+        function zoomTo(v) {
+            const k = bubbleW / v[2];
+
+            view = v;
+
+            label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+            node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+            node.attr("r", d => d.r * k);
         }
 
-        function dragged(event, d) {
-            d.fx = event.x;
-            d.fy = event.y;
+        function zoom(event, d) {
+            const focus0 = focus;
+
+            focus = d;
+
+            const transition = svg3.transition()
+                .duration(event.altKey ? 7500 : 750)
+                .tween("zoom", d => {
+                    const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
+                    return t => zoomTo(i(t));
+                });
+
+            label
+                .filter(function (d) { return d.parent === focus || this.style.display === "inline"; })
+                .transition(transition)
+                .style("fill-opacity", d => d.parent === focus ? 1 : 0)
+                .on("start", function (d) { if (d.parent === focus) this.style.display = "inline"; })
+                .on("end", function (d) { if (d.parent !== focus) this.style.display = "none"; });
         }
 
-        function dragended(event, d) {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        }
+
 
     })
     .catch(error => {
@@ -314,4 +399,18 @@ function Energy(fossil, nuclear, renewable, total, country, access) {
     this.total = total;
     this.country = country;
     this.access = access;
+}
+/* 
+function CountryInsert(continent, country, totalEnergy, renewable){
+    this.continent = continent;
+    this.country = country;
+    this.totalEnergy = totalEnergy;
+    this.renewable = renewable; 
+} */
+
+function CountryInsert(continent, country, totalEnergy, renewable) {
+    this.continent = continent;
+    this.name = country;
+    this.value = totalEnergy; // This is important for D3 packing
+    this.renewable = renewable;
 }

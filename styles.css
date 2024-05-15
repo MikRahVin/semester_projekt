@@ -37,6 +37,9 @@ p {
     padding: 0;
     top: 0;
 }
+.fullPage:nth-last-of-type(){
+    flex-direction: column;
+}
 
 .infoSection{
     height: 40vh;
@@ -90,14 +93,13 @@ p {
     font-size: 3rem;
 }
 
-#container3{
-    width: 80vw;
-    height: 80vh;
-}
+
 
 #container3 svg{
     background-color: whitesmoke;
     box-shadow: 2px 2px 10px #d1d1d1;
     align-content: center;
     border-radius: 5px;
+    width: 700px;
+    height: 700px;
 }
