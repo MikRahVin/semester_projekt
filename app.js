@@ -328,7 +328,7 @@ fetch(apiUrl)
             .attr("viewBox", `-${bubbleW / 2} -${bubbleH / 2} ${bubbleW} ${bubbleH}`)
             .style("display", "block")
             .style("margin", "0 -14px")
-            .style("background", "whitesmoke")
+            .style("background", "white")
             .style("cursor", "pointer")
             .on("click", (event) => zoom(event, root));
 
