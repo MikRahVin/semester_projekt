@@ -60,6 +60,21 @@ h2{
     align-content: center;
 }
 
+#fullPage3{
+    display: flex;
+    flex-direction: column;
+}
+
+#legendContainer{
+    display: flex;
+    justify-content: right;
+    width: 65dvw;
+}
+
+#legend{
+    color: grey;
+    width: 20dvw;
+}
 
 #blackout {
     display: flex;
