@@ -36,6 +36,19 @@ h2{
 
 }
 
+select{
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: larger;
+    border: none;
+    background-color: whitesmoke;
+}
+
+select:active{
+    border: none;
+}
+
+
 .fullPage {
     display: flex;
     flex-direction: row;
@@ -59,6 +72,7 @@ h2{
     align-items: center;
     align-content: center;
 }
+
 
 #fullPage3{
     display: flex;
