@@ -317,6 +317,8 @@ fetch(apiUrl)
                 .sort((a, b) => b.value - a.value));
 
 
+                
+
         const root = pack(continentsObj);
         let focus = root;
         let view;
@@ -332,23 +334,49 @@ fetch(apiUrl)
             .style("cursor", "pointer")
             .on("click", (event) => zoom(event, root));
 
-        const node = svg3.append("g")
-            .selectAll("circle")
-            .data(root.descendants().slice(1))
-            .join("circle")
-            .attr("fill", d => d.children ? "#64a4ce" : "#b7d7ea")
-            .attr("pointer-events", d => !d.children ? "none" : null)
-            .on("mouseover", function () { d3.select(this).attr("stroke", "#274c77"); })
-            .on("mouseout", function () { d3.select(this).attr("stroke", null); })
-            .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
+            
+            const node = svg3.append("g")
+                .selectAll("circle")
+                .data(root.descendants().slice(1))
+                .join("circle")
+                .attr("fill", d => {
+                    if (d.depth === 1 && d.data.name === "Africa") {
+                        return "#64a4ce";
+                    } else if (d.depth === 2 && d.parent.data.name === "Africa") {
+                        return "#b7d7ea"
+                    } else if (d.depth === 1) {
+                        return "#b4b4b4";
+                    } else {
+                        return "#d6d6d6";
+                    }
+                })
+                .attr("pointer-events", d => !d.children ? "none" : null)
+                .on("mouseover", function () { d3.select(this).attr("stroke", d => {
+                    if (d.depth === 1 && d.data.name === "Africa"){
+                        return "#274c77"
+                    } else {
+                        return "#5c5c5c"
+                    }
+                }); })
+                .on("mouseout", function () { d3.select(this).attr("stroke", null); })
+                .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
         const label = svg3.append("g")
-            .style("font-size", "10px")
+            .style("font-size", "13px")
             .attr("pointer-events", "none")
             .attr("text-anchor", "middle")
             .selectAll("text")
             .data(root.descendants())
             .join("text")
+            .style("fill", d =>{
+                if (d.depth === 1 && d.data.name === "Africa") {
+                    return "#274c77";
+                } else if (d.depth === 2 && d.parent.data.name === "Africa") {
+                    return "#274c77"
+                } else {
+                    return "#5c5c5c";
+                } 
+            })
             .style("fill-opacity", d => d.parent === root ? 1 : 0)
             .style("display", d => d.parent === root ? "inline" : "none")
             .text(d => d.data.name);
