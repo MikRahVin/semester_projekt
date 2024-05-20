@@ -233,48 +233,13 @@ fetch(apiUrl)
 
         let continentsObj = {
             "name": "continents",
-            "children": [{
-                "name": "Africa",
-                "value": "",
-                "children": [
-
-                ]
-            },
-            {
-                "name": "Asia",
-                "value": "",
-                "children": [
-
-                ]
-            },
-            {
-                "name": "Europe",
-                "value": "",
-                "children": [
-
-                ]
-            },
-            {
-                "name": "North America",
-                "value": "",
-                "children": [
-
-                ]
-            },
-            {
-                "name": "South America",
-                "value": "",
-                "children": [
-
-                ]
-            },
-            {
-                "name": "Oceania",
-                "value": "",
-                "children": [
-
-                ]
-            }
+            "children": [
+                { "name": "Africa","value": "","children": []},
+            {"name": "Asia","value": "","children": []},
+            {"name": "Europe","value": "","children": []},
+            {"name": "North America","value": "","children": []},
+            {"name": "South America","value": "","children": []},
+            {"name": "Oceania","value": "","children": []}
             ]
         }
 
@@ -428,13 +393,6 @@ function Energy(fossil, nuclear, renewable, total, country, access) {
     this.country = country;
     this.access = access;
 }
-/* 
-function CountryInsert(continent, country, totalEnergy, renewable){
-    this.continent = continent;
-    this.country = country;
-    this.totalEnergy = totalEnergy;
-    this.renewable = renewable; 
-} */
 
 function CountryInsert(continent, country, totalEnergy, renewable) {
     this.continent = continent;
