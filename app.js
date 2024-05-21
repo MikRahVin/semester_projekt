@@ -19,7 +19,7 @@ const bubbleH = 800;
 // appending svg element to container1
 
 // Set the dimensions and margins of the graph
-const margin = {top: 20, right: 100, bottom: 30, left: 50},
+const margin = {top: 20, right: 180, bottom: 30, left: 50},
       width = 800 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
