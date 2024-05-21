@@ -269,6 +269,13 @@ fetch(apiUrl)
             continent.value = average;
         });
 
+        function CountryInsert(continent, country, totalEnergy, renewable) {
+            this.continent = continent;
+            this.name = country;
+            this.value = totalEnergy; // This is important for D3 packing
+            this.renewable = renewable;
+        }
+
 
         const format = d3.format(",d");
 
@@ -394,9 +401,3 @@ function Energy(fossil, nuclear, renewable, total, country, access) {
     this.access = access;
 }
 
-function CountryInsert(continent, country, totalEnergy, renewable) {
-    this.continent = continent;
-    this.name = country;
-    this.value = totalEnergy; // This is important for D3 packing
-    this.renewable = renewable;
-}
