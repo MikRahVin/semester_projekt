@@ -1,7 +1,10 @@
 const container1 = document.querySelector("#contianer1");
 const container2 = document.querySelector("#contianer2");
 const container3 = document.querySelector("#contianer3");
-const solarBtns = document.querySelectorAll(".solarBtn");
+const solarBtn1 = document.querySelector("#solarBtn1");
+const solarBtn2 = document.querySelector("#solarBtn2");
+const solarBtn3 = document.querySelector("#solarBtn3");
+
 
 
 
@@ -326,7 +329,7 @@ fetch(apiUrl)
             .enter()
             .append("circle")
             .attr("id", d => {
-                if(continentsObj.children.name === "Africa"){
+                if(d.name === "Africa"){
                     return "africaCircle"
                 }
             })
@@ -377,11 +380,26 @@ fetch(apiUrl)
         }
 
 
+
+        function addEnergy(amount){
         svg3.select("#africaCircle")
         .transition()
-        .duration(1000)
-        .attr("r", 20)
+        .duration(3000)
+        .attr("r",d => bubbleScale(d.value + amount))
+    }
 
+    solarBtn1.addEventListener("click", () => {
+        console.log("hello")
+        return addEnergy(500)
+    })
+    solarBtn2.addEventListener("click", () => {
+        console.log("hello")
+        return addEnergy(1000)
+    })
+    solarBtn3.addEventListener("click", () => {
+        console.log("hello")
+        return addEnergy(1500)
+    })
 
     })
     .catch(error => {
