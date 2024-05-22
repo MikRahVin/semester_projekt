@@ -59,10 +59,10 @@ const bubbleH = 800;
 
 // appending svg element to container1
 
- // Set the dimensions and margins of the graph
- const margin = {top: 40, right: 180, bottom: 30, left: 50},
- width = 800 - margin.left - margin.right,
- height = 400 - margin.top - margin.bottom;
+// Set the dimensions and margins of the graph
+const margin = {top: 40, right: 180, bottom: 30, left: 50},
+width = 800 - margin.left - margin.right,
+height = 400 - margin.top - margin.bottom;
 
 // Append the svg object to the body of the page
 const svg = d3.select("#container1")
