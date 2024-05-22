@@ -4,10 +4,6 @@ const container3 = document.querySelector("#contianer3");
 const solarBtn1 = document.querySelector("#solarBtn1");
 const solarBtn2 = document.querySelector("#solarBtn2");
 const solarBtn3 = document.querySelector("#solarBtn3");
-
-
-
-
 let customSelects = document.querySelectorAll('.custom-select');
  
 // Attach click event listeners to each custom select
@@ -40,8 +36,6 @@ customSelects.forEach(function (select) {
         }
     });
 });
-
-
 
 let dataset = [32, 63, 81, 5, 18, 9, 54, 56, 34, 24,]
 
@@ -435,7 +429,7 @@ fetch(apiUrl)
             .attr("r", d => bubbleScale(d.value))
             .attr("cx", bubbleW / 2)  // Temporarily set to center
             .attr("cy", bubbleH / 2)  // Temporarily set to center
-            .attr("fill", d => d.name === "Africa" ? "#46bceb" : "#c4c4c4")
+            .attr("fill", d => d.name === "Africa" ? "steelblue" : "#c4c4c4")
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
