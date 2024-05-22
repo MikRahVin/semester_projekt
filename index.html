@@ -14,7 +14,7 @@
         <p>4 out of 5 people in sub-saharan Africa lives in the dark.</p>
     </div>
 
-   
+
     <div class="fullPage">
         <h1>Title goes here</h1>
         <section class="dataViz">
@@ -26,7 +26,7 @@
             <select id="countrySelect"></select>
         </div>
     </div>
-<div class="infoSection"></div>
+    <div class="infoSection"></div>
     <div class="fullPage">
         <div id="container2" class="container"></div>
 
@@ -39,19 +39,26 @@
     </div>
 
     <div class="infoSection"></div>
-    <div class="fullPage">
-        <p>
-            <select name="energyPicker" id="energyPicker">
-                <option value="renewable">Renewable</option>
-                <option value="totalEnergy">Total Energy</option>
-            </select>
-            <select name="solarPanels" id="addSolarPanelFarms">
-                <option value="">little</option>
-                <option value="">many</option>
-                <option value="">A LOT!!!1</option>
-            </select>
-        </p>
-        <div id="container3" class="container"></div>
+    <div id="fullPage3" class="fullPage">
+
+        <div id="container3" class="container">
+            <h2>What happens when you add renewable electricity to Africa's electricity mix?</h2>
+            <p>
+                <select name="solarPanels" id="addSolarPanelPlants">
+                    <option value="0">Zero added solar panel plants</option>
+                    <option value="">little</option>
+                    <option value="">many</option>
+                    <option value="">A LOT!!!1</option>
+                </select>
+            </p>
+        </div>
+        <div id="legendContainer">
+            <div id="legend">
+                The electricity mix is calculated based on the average energy generated per capita kwh. Data source:
+                OurWorldInData.org - Per capita electricity generartion from fossil fuels, nucelar and renewables, 2023
+            </div>
+
+        </div>
     </div>
     <div class="infoSection"></div>
     <script src="d3/d3.v7.min.js"></script>
