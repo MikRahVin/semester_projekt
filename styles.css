@@ -119,12 +119,12 @@ select{
 #legendContainer{
     display: flex;
     justify-content: right;
-    width: 65dvw;
+    width: 75dvw;
 }
 
 #legend{
     color: grey;
-    width: 20dvw;
+    width: 30dvw;
 }
 
 #blackout {
