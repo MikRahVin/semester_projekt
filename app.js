@@ -286,9 +286,10 @@ fetch(apiUrl)
 
         //populating continentsObj using CountryInsert.
         data.forEach(country => {
-            let totalEnergy = country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity;
-            let renewable = country.renewable_electricity;
-            let countryObj = new CountryInsert(country.continent, country.country, totalEnergy, renewable);
+            let countryObj = new CountryInsert(country.continent, 
+                country.country, 
+                country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity, 
+                country.renewable_electricity);
             let continentFound = continentsObj.children.find(continent => continent.name === country.continent);
             if (continentFound) {
                 continentFound.children.push(countryObj);
@@ -315,12 +316,12 @@ fetch(apiUrl)
             .range([10, 200]);
 
             const simulation = d3.forceSimulation(continentsObj.children)
-            .force("charge", d3.forceManyBody().strength(100))  // Repulsive force, adjust as needed
+            .force("charge", d3.forceManyBody().strength(200))  
             .force("center", d3.forceCenter(bubbleW / 2, bubbleH / 2))
-            .force("collision", d3.forceCollide(30)
-                .radius(d => bubbleScale(d.value))  // Set radius exactly to scaled value
-                .strength(0.7)  // Maximum strength to ensure separation
-                .iterations(16))  // Increase iterations for more accurate simulation
+            .force("collision", d3.forceCollide(d => d.radius + 5)
+                .radius(d => bubbleScale(d.value)) 
+                .strength(0.2)  
+                .iterations(16))
             .on("tick", ticked);
         
         // Create bubbles
