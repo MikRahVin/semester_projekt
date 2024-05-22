@@ -42,10 +42,46 @@ select{
     font-size: larger;
     border: none;
     background-color: whitesmoke;
+    margin: 15px;
+    box-shadow: 2px 2px 15px #c2c2c2;
 }
 
-select:active{
-    border: none;
+.custom-select {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    box-shadow: 2px 2px 15px #c2c2c2;
+    border-radius: 8px;
+}
+ 
+.select-selected {
+    background-color: whitesmoke;
+    color: #333333;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+ 
+/* Style the dropdown items */
+.select-items {
+    position: absolute;
+    display: none;
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 15px #c2c2c2;
+    border-radius: 4px;
+    z-index: 1;
+    width: 100%;
+}
+ 
+/* Style the dropdown items */
+.select-items div {
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+}
+ 
+/* Style the dropdown items on hover */
+.select-items div:hover {
+    background-color: #ececec;
 }
 
 
@@ -64,7 +100,7 @@ select:active{
 .infoSection {
     height: 40vh;
     width: 100%;
-    background-color: #c7d3f3;
+    background-color: whitesmoke;
 }
 
 .container {
@@ -72,6 +108,7 @@ select:active{
     align-items: center;
     align-content: center;
 }
+
 
 
 #fullPage3{
@@ -116,13 +153,20 @@ select:active{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 65dvw;
+    width: 75dvw;
 }
 
 #container3 svg {
     align-content: center;
-    width: 65dvw;
+    background-color: whitesmoke;
+    margin: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 15px #c2c2c2;
+    padding: 0.5rem;
+
 }
 #container3 p{
     margin: 0;
 }
+
+
