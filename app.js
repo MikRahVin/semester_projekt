@@ -407,12 +407,13 @@ fetch(apiUrl)
         console.error('Error:', error);
     });
 
-function Energy(fossil, nuclear, renewable, total, country, access) {
+function Energy(fossil, nuclear, renewable, total, country, continent, access) {
     this.fossil = fossil;
     this.nuclear = nuclear;
     this.renewable = renewable;
     this.total = total;
     this.country = country;
+    this.continent = continent;
     this.access = access;
 }
 
