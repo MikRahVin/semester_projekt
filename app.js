@@ -5,13 +5,13 @@ const solarBtn1 = document.querySelector("#solarBtn1");
 const solarBtn2 = document.querySelector("#solarBtn2");
 const solarBtn3 = document.querySelector("#solarBtn3");
 let customSelects = document.querySelectorAll('.custom-select');
- 
+
 // Attach click event listeners to each custom select
 customSelects.forEach(function (select) {
     let selectSelected = select.querySelector('.select-selected');
     let selectItems = select.querySelector('.select-items');
     let options = selectItems.querySelectorAll('div');
- 
+
     // Toggle the dropdown visibility when the select box is clicked
     selectSelected.addEventListener('click', function () {
         if (selectItems.style.display === 'block') {
@@ -20,7 +20,7 @@ customSelects.forEach(function (select) {
             selectItems.style.display = 'block';
         }
     });
- 
+
     // Set the selected option and hide the dropdown when an option is clicked
     options.forEach(function (option) {
         option.addEventListener('click', function () {
@@ -28,7 +28,7 @@ customSelects.forEach(function (select) {
             selectItems.style.display = 'none';
         });
     });
- 
+
     // Close the dropdown if the user clicks outside of it
     window.addEventListener('click', function (e) {
         if (!select.contains(e.target)) {
@@ -54,16 +54,16 @@ const bubbleH = 800;
 // appending svg element to container1
 
 // Set the dimensions and margins of the graph
-const margin = {top: 20, right: 180, bottom: 30, left: 50},
-      width = 800 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+const margin = { top: 20, right: 180, bottom: 30, left: 50 },
+    width = 800 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
 // Append the svg object to the body of the page
 const svg = d3.select("#container1")
-  .append("svg")
+    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Parse the Year / time
@@ -71,88 +71,88 @@ const parseTime = d3.timeParse("%Y");
 
 // Load the CSV file
 d3.csv("electricity_access.csv").then(data => {
-  data.forEach(d => {
-    d.Year = parseTime(d.Year);
-    d.Value = +d.Value;
-  });
+    data.forEach(d => {
+        d.Year = parseTime(d.Year);
+        d.Value = +d.Value;
+    });
 
-  // Extract unique countries and years for the dropdowns
-  const countries = Array.from(new Set(data.map(d => d.Country)));
-  const years = Array.from(new Set(data.map(d => d.Year.getFullYear())));
+    // Extract unique countries and years for the dropdowns
+    const countries = Array.from(new Set(data.map(d => d.Country)));
+    const years = Array.from(new Set(data.map(d => d.Year.getFullYear())));
 
-  // Populate the country dropdown
-  const countrySelect = d3.select("#countrySelect");
-  countrySelect.selectAll("option")
-    .data(countries)
-    .enter()
-    .append("option")
-    .text(d => d);
+    // Populate the country dropdown
+    const countrySelect = d3.select("#countrySelect");
+    countrySelect.selectAll("option")
+        .data(countries)
+        .enter()
+        .append("option")
+        .text(d => d);
 
-  // Populate the year dropdown
-  const yearSelect = d3.select("#yearSelect");
-  yearSelect.selectAll("option")
-    .data(years)
-    .enter()
-    .append("option")
-    .text(d => d);
+    // Populate the year dropdown
+    const yearSelect = d3.select("#yearSelect");
+    yearSelect.selectAll("option")
+        .data(years)
+        .enter()
+        .append("option")
+        .text(d => d);
 
-  // Function to update the chart
-  function updateChart(country) {
-    // Filter data for the selected country
-    const filteredData = data.filter(d => d.Country === country);
+    // Function to update the chart
+    function updateChart(country) {
+        // Filter data for the selected country
+        const filteredData = data.filter(d => d.Country === country);
 
-    // Check if filtered data is empty
-    if (filteredData.length === 0) {
-      console.log("No data for the selected country");
-      return;
+        // Check if filtered data is empty
+        if (filteredData.length === 0) {
+            console.log("No data for the selected country");
+            return;
+        }
+
+        // Set the ranges
+        const x = d3.scaleTime().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0]);
+
+        // Define the area
+        const area = d3.area()
+            .x(d => x(d.Year))
+            .y0(height)
+            .y1(d => y(d.Value));
+
+        // Scale the range of the data
+        x.domain(d3.extent(filteredData, d => d.Year));
+        y.domain([0, d3.max(filteredData, d => d.Value)]);
+
+        // Remove any existing path
+        svg.selectAll(".area").remove();
+
+        // Add the area path
+        svg.append("path")
+            .data([filteredData])
+            .attr("class", "area")
+            .attr("d", area)
+            .style("fill", "steelblue");
+
+        // Add the X Axis
+        svg.selectAll(".x-axis").remove();
+        svg.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x));
+
+        // Add the Y Axis
+        svg.selectAll(".y-axis").remove();
+        svg.append("g")
+            .attr("class", "y-axis")
+            .call(d3.axisLeft(y));
     }
 
-    // Set the ranges
-    const x = d3.scaleTime().range([0, width]);
-    const y = d3.scaleLinear().range([height, 0]);
+    // Event listener for country dropdown
+    countrySelect.on("change", () => {
+        const selectedCountry = countrySelect.node().value;
+        updateChart(selectedCountry);
+    });
 
-    // Define the area
-    const area = d3.area()
-      .x(d => x(d.Year))
-      .y0(height)
-      .y1(d => y(d.Value));
-
-    // Scale the range of the data
-    x.domain(d3.extent(filteredData, d => d.Year));
-    y.domain([0, d3.max(filteredData, d => d.Value)]);
-
-    // Remove any existing path
-    svg.selectAll(".area").remove();
-
-    // Add the area path
-    svg.append("path")
-      .data([filteredData])
-      .attr("class", "area")
-      .attr("d", area)
-      .style("fill", "steelblue");
-
-    // Add the X Axis
-    svg.selectAll(".x-axis").remove();
-    svg.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(x));
-
-    // Add the Y Axis
-    svg.selectAll(".y-axis").remove();
-    svg.append("g")
-      .attr("class", "y-axis")
-      .call(d3.axisLeft(y));
-  }
-
-  // Event listener for country dropdown
-  countrySelect.on("change", () => {
-    const selectedCountry = countrySelect.node().value;
-    updateChart(selectedCountry);
-  });
-
-  // Initial chart update
-  updateChart(countries[0]);
+    // Initial chart update
+    updateChart(countries[0]);
 });
 
 
@@ -367,21 +367,23 @@ fetch(apiUrl)
         let continentsObj = {
             "name": "continents",
             "children": [
-                { "name": "Africa", "value": 0, "children": [] },
-                { "name": "Asia", "value": 0, "children": [] },
-                { "name": "Europe", "value": 0, "children": [] },
-                { "name": "North America", "value": 0, "children": [] },
-                { "name": "South America", "value": 0, "children": [] },
-                { "name": "Oceania", "value": 0, "children": [] },
+                { "name": "Africa", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "Asia", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "Europe", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "North America", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "South America", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "Oceania", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
             ]
         }
 
         //populating continentsObj using CountryInsert.
         data.forEach(country => {
-            let countryObj = new CountryInsert(country.continent, 
-                country.country, 
-                country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity, 
-                country.renewable_electricity);
+            let countryObj = new CountryInsert(country.continent,
+                country.country,
+                country.fossil_fuel + country.nuclear_electricity + country.renewable_electricity,
+                country.renewable_electricity,
+                country.nuclear_electricity,
+                country.fossil_fuel);
             let continentFound = continentsObj.children.find(continent => continent.name === country.continent);
             if (continentFound) {
                 continentFound.children.push(countryObj);
@@ -394,6 +396,14 @@ fetch(apiUrl)
             if (continent.children.length > 0) {
                 const total = continent.children.reduce((acc, country) => acc + country.value, 0);
                 continent.value = total / continent.children.length;
+                const renewable = continent.children.reduce((acc, country) => acc + country.renewable, 0);
+                continent.renewable = renewable / continent.children.length;
+                const nuclear = continent.children.reduce((acc, country) => acc + country.nuclear, 0);
+                continent.nuclear = nuclear / continent.children.length;
+                const fossil = continent.children.reduce((acc, country) => acc + country.fossil, 0);
+                continent.fossil = fossil / continent.children.length;
+
+
             }
         });
 
@@ -407,22 +417,22 @@ fetch(apiUrl)
             .domain([0, d3.max(continentsObj.children, d => d.value)])
             .range([10, 200]);
 
-            const simulation = d3.forceSimulation(continentsObj.children)
-            .force("charge", d3.forceManyBody().strength(200))  
+        const simulation = d3.forceSimulation(continentsObj.children)
+            .force("charge", d3.forceManyBody().strength(200))
             .force("center", d3.forceCenter(bubbleW / 2, bubbleH / 2))
             .force("collision", d3.forceCollide(d => d.radius + 5)
-                .radius(d => bubbleScale(d.value)) 
-                .strength(0.2)  
+                .radius(d => bubbleScale(d.value))
+                .strength(0.2)
                 .iterations(16))
             .on("tick", ticked);
-        
+
         // Create bubbles
         const bubbles = svg3.selectAll("circle")
             .data(continentsObj.children)
             .enter()
             .append("circle")
             .attr("id", d => {
-                if(d.name === "Africa"){
+                if (d.name === "Africa") {
                     return "africaCircle"
                 }
             })
@@ -474,25 +484,25 @@ fetch(apiUrl)
 
 
 
-        function addEnergy(amount){
-        svg3.select("#africaCircle")
-        .transition()
-        .duration(3000)
-        .attr("r",d => bubbleScale(d.value + amount))
-    }
+        function addEnergy(amount) {
+            svg3.select("#africaCircle")
+                .transition()
+                .duration(3000)
+                .attr("r", d => bubbleScale(d.value + amount))
+        }
 
-    solarBtn1.addEventListener("click", () => {
-        console.log("hello")
-        return addEnergy(500)
-    })
-    solarBtn2.addEventListener("click", () => {
-        console.log("hello")
-        return addEnergy(1000)
-    })
-    solarBtn3.addEventListener("click", () => {
-        console.log("hello")
-        return addEnergy(1500)
-    })
+        solarBtn1.addEventListener("click", () => {
+            console.log("hello")
+            return addEnergy(500)
+        })
+        solarBtn2.addEventListener("click", () => {
+            console.log("hello")
+            return addEnergy(1000)
+        })
+        solarBtn3.addEventListener("click", () => {
+            console.log("hello")
+            return addEnergy(1500)
+        })
 
     })
     .catch(error => {
@@ -509,9 +519,11 @@ function Energy(fossil, nuclear, renewable, total, country, continent, access) {
     this.access = access;
 }
 
-function CountryInsert(continent, country, totalEnergy, renewable) {
+function CountryInsert(continent, country, totalEnergy, renewable, nuclear, fossil) {
     this.continent = continent;
     this.name = country;
     this.value = totalEnergy; // This is important for D3 packing
     this.renewable = renewable;
+    this.nuclear = nuclear;
+    this.fossil = fossil;
 }
