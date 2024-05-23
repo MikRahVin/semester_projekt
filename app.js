@@ -43,6 +43,7 @@ customSelects.forEach(function (select) {
 
 
 
+
 // DO NOT TOUCH BELOW HERE
 const apiUrl = 'http://localhost:4000/energy'
 
@@ -103,6 +104,8 @@ fetch(apiUrl)
             }
         });
 
+
+
         const svg3 = d3.select("#container3")
             .append("svg")
             .attr("width", bubbleW)
@@ -113,7 +116,7 @@ fetch(apiUrl)
             .domain([0, d3.max(continentsObj.children, d => d.value)])
             .range([10, 200]);
 
-            let simulation = d3.forceSimulation(continentsObj.children)
+        let simulation = d3.forceSimulation(continentsObj.children)
             .force("charge", d3.forceManyBody().strength(200)) // You might adjust the strength as needed
             .force("center", d3.forceCenter(bubbleW / 2, bubbleH / 2))
             .force("collision", d3.forceCollide().radius(d => bubbleScale(d.value) + 10).strength(1.2).iterations(32))
@@ -145,8 +148,9 @@ fetch(apiUrl)
             .attr("x", d => d.x)
             .attr("y", d => d.y)
             .attr("text-anchor", "middle")
+            .style("font-weight", d => d.name === "Africa" ? "bold" : "")
             .style("fill", "#fff")
-            .text(d => `${d.name}: ${Math.round( d.value)} kwh`);
+            .text(d => `${d.name}: ${Math.round(d.value)} kwh`);
 
         function ticked() {
             bubbles
@@ -170,7 +174,7 @@ fetch(apiUrl)
             d.fy = event.y;
             simulation.alpha(0.7).restart(); // Increase the 'heat' of simulation on drag
         }
-        
+
         function dragended(event, d) {
             if (!event.active) simulation.alphaTarget(0);
             d.fx = null;
@@ -188,7 +192,7 @@ fetch(apiUrl)
             simulation.stop();
 
             labels.filter(d => d.name === "Africa")
-            .text(d => `${d.name}: ${Math.round(d.value)} kWh`);
+                .text(d => `${d.name}: ${Math.round(d.value)} kWh`);
             // Update the radius of the Africa circle in the SVG with transition
             svg3.select("#africaCircle")
                 .transition()
@@ -199,15 +203,15 @@ fetch(apiUrl)
                     // Restart the simulation after the transition completes
                     simulation.nodes(continentsObj.children).alpha(1).restart();
                 });
-        
+
             // Manually update the collision radius for all nodes in the simulation
             simulation.force("collision", d3.forceCollide().radius(d => bubbleScale(d.value) + 5));
-        
+
             // Optionally, manually trigger the tick function to update positions immediately
             simulation.alpha(1).restart();
         }
-        
-        
+
+
 
         solarBtn0.addEventListener("click", () => {
             return setEnergy(originalValue)
@@ -221,6 +225,12 @@ fetch(apiUrl)
         solarBtn3.addEventListener("click", () => {
             return setEnergy(2086.2 + originalValue)
         })
+
+
+        let instructions = document.createElement("div");
+        instructions.classList.add("instructions");
+        instructions.innerText = "Try draggin the bubbles to compare them";
+        svg3.append(instructions)
 
     })
     .catch(error => {
