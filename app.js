@@ -1,10 +1,13 @@
-const container1 = document.querySelector("#contianer1");
-const container2 = document.querySelector("#contianer2");
-const container3 = document.querySelector("#contianer3");
+const container3 = document.querySelector("#container3");
+const solarBtn0 = document.querySelector("#solarBtn0");
 const solarBtn1 = document.querySelector("#solarBtn1");
 const solarBtn2 = document.querySelector("#solarBtn2");
 const solarBtn3 = document.querySelector("#solarBtn3");
 let customSelects = document.querySelectorAll('.custom-select');
+let bubbleW = 1300;
+const bubbleH = 700;
+
+let originalValue = 667.9646642157649;
 
 // Attach click event listeners to each custom select
 customSelects.forEach(function (select) {
@@ -37,105 +40,6 @@ customSelects.forEach(function (select) {
     });
 });
 
-let dataset = [32, 63, 81, 5, 18, 9, 54, 56, 34, 24,]
-
-
-const w = 700;
-const h = 450;
-const pad = 40;
-let dur = 800
-
-let bubbleW = window.innerWidth * 0.75;
-const bubbleH = 800;
-
-
-
-
-// appending svg element to container1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// appending svg element to container2
-const svg2 = d3.select("#container2")
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// appending svg element to container3
-
-
-
 
 
 
@@ -154,119 +58,18 @@ fetch(apiUrl)
     .then(data => {
         console.log(data)
 
-        let energyObjects = [];
-        for (let i in data) {
-            let energy = new Energy(
-                data[i].fossil_fuel,
-                data[i].nuclear_electricity,
-                data[i].renewable_electricity,
-                data[i].fossil_fuel + data[i].nuclear_electricity + data[i].renewable_electricity,
-                data[i].country,
-                data[i].access_pct
-            );
-            energyObjects.push(energy);
-        }
-        console.log(energyObjects)
-
-
-
-
-        //GRAPH/CHART FOR DATA VIZ 1 GOES HERE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //GRAPH/CHART FOR DATA VIZ 2 GOES HERE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // BUBBLE CHART FOR DATA VIZ 3 GOES HERE
         //append svg for bubblechart
 
         let continentsObj = {
             "name": "continents",
             "children": [
-                { "name": "Africa", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
                 { "name": "Asia", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
                 { "name": "Europe", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
                 { "name": "North America", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
                 { "name": "South America", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
                 { "name": "Oceania", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] },
+                { "name": "Africa", "value": 0, "fossil": 0, "nuclear": 0, "renewable": 0, "children": [] }
             ]
         }
 
@@ -301,6 +104,8 @@ fetch(apiUrl)
             }
         });
 
+
+
         const svg3 = d3.select("#container3")
             .append("svg")
             .attr("width", bubbleW)
@@ -311,13 +116,10 @@ fetch(apiUrl)
             .domain([0, d3.max(continentsObj.children, d => d.value)])
             .range([10, 200]);
 
-        const simulation = d3.forceSimulation(continentsObj.children)
-            .force("charge", d3.forceManyBody().strength(200))
+        let simulation = d3.forceSimulation(continentsObj.children)
+            .force("charge", d3.forceManyBody().strength(200)) // You might adjust the strength as needed
             .force("center", d3.forceCenter(bubbleW / 2, bubbleH / 2))
-            .force("collision", d3.forceCollide(d => d.radius + 5)
-                .radius(d => bubbleScale(d.value))
-                .strength(0.2)
-                .iterations(16))
+            .force("collision", d3.forceCollide().radius(d => bubbleScale(d.value) + 10).strength(1.2).iterations(32))
             .on("tick", ticked);
 
         // Create bubbles
@@ -346,18 +148,20 @@ fetch(apiUrl)
             .attr("x", d => d.x)
             .attr("y", d => d.y)
             .attr("text-anchor", "middle")
+            .style("font-weight", d => d.name === "Africa" ? "bold" : "")
             .style("fill", "#fff")
-            .text(d => d.name);
+            .text(d => `${d.name}: ${Math.round(d.value)} kwh`);
 
         function ticked() {
             bubbles
                 .attr("cx", d => d.x = Math.max(bubbleScale(d.value), Math.min(bubbleW - bubbleScale(d.value), d.x)))
-                .attr("cy", d => d.y = Math.max(bubbleScale(d.value), Math.min(bubbleH - bubbleScale(d.value), d.y)));
+                .attr("cy", d => d.y = Math.max(bubbleScale(d.value), Math.min(bubbleH - bubbleScale(d.value), d.y)))
 
             labels
                 .attr("x", d => d.x)
                 .attr("y", d => d.y);
         }
+
 
         function dragstarted(event, d) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -368,50 +172,71 @@ fetch(apiUrl)
         function dragged(event, d) {
             d.fx = event.x;
             d.fy = event.y;
+            simulation.alpha(0.7).restart(); // Increase the 'heat' of simulation on drag
         }
 
         function dragended(event, d) {
             if (!event.active) simulation.alphaTarget(0);
             d.fx = null;
             d.fy = null;
+            simulation.force("collision", d3.forceCollide().radius(d => bubbleScale(d.value) + 5)); // Reapply collision with updated positions
         }
 
 
+        function setEnergy(amount) {
+            let africa = continentsObj.children.find(continent => continent.name === "Africa");
+            if (africa) {
+                africa.value = amount; // Set the value for Africa
+            }
+            // Temporarily stop the simulation to avoid conflicts during transition
+            simulation.stop();
 
-        function addEnergy(amount) {
+            labels.filter(d => d.name === "Africa")
+                .text(d => `${d.name}: ${Math.round(d.value)} kWh`);
+            // Update the radius of the Africa circle in the SVG with transition
             svg3.select("#africaCircle")
                 .transition()
-                .duration(3000)
-                .attr("r", d => bubbleScale(d.value + amount))
+                .ease(d3.easeElastic)
+                .duration(700)
+                .attr("r", bubbleScale(africa.value))
+                .on("end", () => {
+                    // Restart the simulation after the transition completes
+                    simulation.nodes(continentsObj.children).alpha(1).restart();
+                });
+
+            // Manually update the collision radius for all nodes in the simulation
+            simulation.force("collision", d3.forceCollide().radius(d => bubbleScale(d.value) + 5));
+
+            // Optionally, manually trigger the tick function to update positions immediately
+            simulation.alpha(1).restart();
         }
 
+
+
+        solarBtn0.addEventListener("click", () => {
+            return setEnergy(originalValue)
+        })
         solarBtn1.addEventListener("click", () => {
-            console.log("hello")
-            return addEnergy(500)
+            return setEnergy(521.55 + originalValue)
         })
         solarBtn2.addEventListener("click", () => {
-            console.log("hello")
-            return addEnergy(1000)
+            return setEnergy(1043.1 + originalValue)
         })
         solarBtn3.addEventListener("click", () => {
-            console.log("hello")
-            return addEnergy(1500)
+            return setEnergy(2086.2 + originalValue)
         })
+
+
+        let instructions = document.createElement("div");
+        instructions.classList.add("instructions");
+        instructions.innerText = "Try draggin the bubbles to compare them";
+        svg3.append(instructions)
 
     })
     .catch(error => {
         console.error('Error:', error);
     });
 
-function Energy(fossil, nuclear, renewable, total, country, continent, access) {
-    this.fossil = fossil;
-    this.nuclear = nuclear;
-    this.renewable = renewable;
-    this.total = total;
-    this.country = country;
-    this.continent = continent;
-    this.access = access;
-}
 
 function CountryInsert(continent, country, totalEnergy, renewable, nuclear, fossil) {
     this.continent = continent;

@@ -1,7 +1,7 @@
 // Set the dimensions and margins of the graph
 const margin = {top: 40, right: 180, bottom: 30, left: 50},
-width = 800 - margin.left - margin.right,
-height = 400 - margin.top - margin.bottom;
+width = 900 - margin.left - margin.right,
+height = 450 - margin.top - margin.bottom;
 
 // Append the svg object to the body of the page
 const svg = d3.select("#container1")
@@ -12,11 +12,6 @@ const svg = d3.select("#container1")
 .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Add title to the chart
-svg.append("text")
-.attr("x", (width / 2))
-.attr("y", -20)
-.attr("class", "chart-title")
-.text("Electricity Access Over Time: World vs Sub-Saharan Africa");
 
 // Parse the Year / time
 const parseTime = d3.timeParse("%Y");

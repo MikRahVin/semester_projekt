@@ -13,12 +13,10 @@ body {
 
 
 h1 {
-    margin: 2rem 8rem;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-family: 'Times New Roman', Times, serif;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    width: 1300px;
+
 }
 
 p {
@@ -96,7 +94,6 @@ select{
     top: 0;
 }
 
-
 .infoSection {
     height: 40vh;
     width: 100%;
@@ -107,11 +104,43 @@ select{
     display: flex;
     align-items: center;
     align-content: center;
+    width: 1300px;
+    justify-content: start;
+}
+
+.line {
+    fill: none;
+    stroke-width: 10px;
+}
+.legend {
+    font-size: 12px;
+}
+
+.Chart-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.instructions{
+    background-color: blue;
 }
 
 
-
-#fullPage3{
+#fullPage3, #fullPage1{
     display: flex;
     flex-direction: column;
 }
@@ -119,7 +148,7 @@ select{
 #legendContainer{
     display: flex;
     justify-content: right;
-    width: 75dvw;
+    width: 1300px;
 }
 
 #legend{
@@ -149,11 +178,16 @@ select{
 
 }
 
+#container1{
+    justify-content: center;
+}
+
 #container3 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 75dvw;
+    width: 1300px;
+    justify-content: left;
 }
 
 #container3 svg {
@@ -169,29 +203,3 @@ select{
     margin: 0;
 }
 
-.line {
-    fill: none;
-    stroke-width: 10px;
-}
-.legend {
-    font-size: 12px;
-}
-
-.Chart-title {
-    font-size: 16px;
-    font-weight: bold;
-    text-anchor: middle;
-}
-
-.tooltip {
-    position: absolute;
-    text-align: center;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
-    font-size: 12px;
-}
