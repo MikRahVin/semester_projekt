@@ -40,10 +40,6 @@ customSelects.forEach(function (select) {
     });
 });
 
-
-
-
-
 // DO NOT TOUCH BELOW HERE
 const apiUrl = 'http://localhost:4000/energy'
 
@@ -226,11 +222,6 @@ fetch(apiUrl)
             return setEnergy(2086.2 + originalValue)
         })
 
-
-        let instructions = document.createElement("div");
-        instructions.classList.add("instructions");
-        instructions.innerText = "Try draggin the bubbles to compare them";
-        svg3.append(instructions)
 
     })
     .catch(error => {
