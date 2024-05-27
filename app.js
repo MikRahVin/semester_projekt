@@ -161,7 +161,7 @@ fetch(apiUrl)
             .attr("cx", bubbleW / 2)  // Temporarily set to center
             .attr("cy", bubbleH / 2)  // Temporarily set to center
             //if data.name = to africa then set the color to steelblue, otherwise it should be #c4c4c4
-            .attr("fill", d => d.name === "Africa" ? "steelblue" : "#c4c4c4")
+            .attr("fill", d => d.name === "Africa" ? "steelblue" : "hsl(207, 44%, 75%)")
             // .call is a method that invokes functions on the selected elements. these functions are defined elsewhere in the script.
             .call(d3.drag()
                 .on("start", dragstarted)

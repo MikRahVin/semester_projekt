@@ -27,7 +27,7 @@
 
         const color = d3.scaleOrdinal()
             .domain(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
-            .range(d3.schemeCategory10);
+            .range(["hsl(207, 44%, 75%)", "hsl(207, 44%, 65%)", "hsl(207, 44%, 49%)"]);
 
         const area = d3.area()
             .x(d => x(d.data.Year))

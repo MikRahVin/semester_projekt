@@ -213,3 +213,7 @@ h1, .container, #container3 {
     flex-direction: column;
 }
 
+#container2{
+    justify-content: space-evenly;
+}
+

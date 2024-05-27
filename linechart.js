@@ -79,7 +79,7 @@ d3.csv("electricity_access.csv").then(data => {
        .datum(worldData)
        .attr("class", "line")
        .attr("d", line)
-       .style("stroke", "#c4c4c4")
+       .style("stroke", "hsl(207, 44%, 75%)")
        .on("mousemove", (event, d) => handleMouseOver(event, d, "World", worldData))
        .on("mouseout", handleMouseOut);
 
@@ -108,7 +108,7 @@ d3.csv("electricity_access.csv").then(data => {
        .attr("x", width + 10)
        .attr("y", 38)
        .attr("class", "legend")
-       .style("fill", "#c4c4c4")
+       .style("fill", "hsl(207, 44%, 75%)")
        .text("World");
 
     svg.append("text")
