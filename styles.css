@@ -15,8 +15,7 @@ body {
 
 
 h1 {
-    font-size: 3.5rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
     width: 1300px;
 
 }
@@ -24,6 +23,7 @@ h1 {
 p {
     margin: 3rem;
     width: 20rem;
+    
 }
 
 span {
@@ -31,8 +31,8 @@ span {
 }
 
 h2{
-    font-size: 3.5rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    width: 1300px;
 
 }
 
@@ -92,13 +92,13 @@ h1, .container, #container3 {
     background-color: #ececec;
 }
 
-
 .fullPage {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 2rem 0;
 }
 
 .infoSection {
@@ -117,7 +117,7 @@ h1, .container, #container3 {
 
 .line {
     fill: none;
-    stroke-width: 10px;
+    stroke-width: 7px;
 }
 .legend {
     font-size: 12px;
@@ -147,10 +147,7 @@ h1, .container, #container3 {
 }
 
 
-#fullPage3, #fullPage1{
-    display: flex;
-    flex-direction: column;
-}
+
 
 #legendContainer{
     display: flex;
@@ -209,5 +206,14 @@ h1, .container, #container3 {
 }
 #container3 p{
     margin: 0;
+}
+
+#areaChartContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+#container2{
+    justify-content: space-evenly;
 }
 
