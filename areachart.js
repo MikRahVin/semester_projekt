@@ -12,12 +12,11 @@
             d.Renewable_electricity = +d.Renewable_electricity;
         });
 
-        const svg = d3.select("#container2")
-        .append("svg")
+        const svg = d3.select("#areaChart")
         .attr("width", areaW)
         .attr("height", areaH + margin.bottom)  
         .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        .attr("transform", `translate(${margin.top})`);
 
 
         const x = d3.scaleLinear()

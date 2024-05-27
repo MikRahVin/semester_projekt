@@ -15,8 +15,7 @@ body {
 
 
 h1 {
-    font-size: 3.5rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
     width: 1300px;
 
 }
@@ -24,6 +23,7 @@ h1 {
 p {
     margin: 3rem;
     width: 20rem;
+    
 }
 
 span {
@@ -31,8 +31,7 @@ span {
 }
 
 h2{
-    font-size: 3.5rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
     width: 1300px;
 
 }
@@ -147,10 +146,8 @@ h1, .container, #container3 {
     background-color: blue;
 }
 
-#container2{
-    display: flex;
-    flex-direction: row;
-}
+
+
 
 #legendContainer{
     display: flex;
@@ -209,5 +206,10 @@ h1, .container, #container3 {
 }
 #container3 p{
     margin: 0;
+}
+
+#areaChartContainer{
+    display: flex;
+    flex-direction: column;
 }
 
