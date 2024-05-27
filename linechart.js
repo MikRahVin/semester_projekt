@@ -3,6 +3,7 @@ const margin = {top: 40, right: 180, bottom: 30, left: 50},
       width = 900 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
 
+
 // Append the svg object to the body of the page
 const svg = d3.select("#container1")
               .append("svg")
@@ -12,6 +13,7 @@ const svg = d3.select("#container1")
               .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Add title to the chart
+
 svg.append("text")
    .attr("x", (width / 2))
    .attr("y", -20)

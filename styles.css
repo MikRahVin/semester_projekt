@@ -4,6 +4,7 @@
     font-style: normal;
 }
 
+
 body {
     width: 100%;
     height: 100%;
@@ -12,13 +13,12 @@ body {
 }
 
 
+
 h1 {
-    margin: 2rem 8rem;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-family: 'Times New Roman', Times, serif;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    width: 1300px;
+
 }
 
 p {
@@ -44,6 +44,14 @@ select{
     background-color: whitesmoke;
     margin: 15px;
     box-shadow: 2px 2px 15px #c2c2c2;
+}
+
+h1, .container, #container3 {
+    max-width: 100%;
+}
+
+.infoSection, #blackout {
+    width: 100vw;
 }
 
 .custom-select {
@@ -91,11 +99,7 @@ select{
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin: 0;
-    padding: 3rem 0;
-    top: 0;
 }
-
 
 .infoSection {
     height: 40vh;
@@ -107,66 +111,8 @@ select{
     display: flex;
     align-items: center;
     align-content: center;
-}
-
-
-
-#fullPage3{
-    display: flex;
-    flex-direction: column;
-}
-
-#legendContainer{
-    display: flex;
-    justify-content: right;
-    width: 75dvw;
-}
-
-#legend{
-    color: grey;
-    width: 30dvw;
-}
-
-#blackout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    top: 0;
-}
-
-#blackout p {
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    width: 100%;
-    margin: 2rem 0;
-
-}
-
-#container3 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 75dvw;
-}
-
-#container3 svg {
-    align-content: center;
-    background-color: whitesmoke;
-    margin: 15px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 15px #c2c2c2;
-    padding: 0.5rem;
-
-}
-#container3 p{
-    margin: 0;
+    width: 1300px;
+    justify-content: start;
 }
 
 .line {
@@ -195,3 +141,73 @@ select{
     pointer-events: none;
     font-size: 12px;
 }
+
+.instructions{
+    background-color: blue;
+}
+
+
+#fullPage3, #fullPage1{
+    display: flex;
+    flex-direction: column;
+}
+
+#legendContainer{
+    display: flex;
+    justify-content: right;
+    width: 1300px;
+}
+
+#legend{
+    color: grey;
+    width: 30dvw;
+    margin-bottom: 1rem;
+}
+
+#blackout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 100%;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    top: 0;
+}
+
+#blackout p {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+    margin: 2rem 0;
+
+}
+
+#container1{
+    justify-content: center;
+}
+
+#container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 1300px;
+    justify-content: left;
+}
+
+#container3 svg {
+    align-content: center;
+    background-color: whitesmoke;
+    margin: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 15px #c2c2c2;
+    padding: 0.5rem;
+
+}
+#container3 p{
+    margin: 0;
+}
+
