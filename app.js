@@ -9,7 +9,7 @@ let customSelects = document.querySelectorAll('.custom-select');
 
 // declaring height and width of our data visualization as variables, so that if we want to change them, we only need to change the values here.
 let bubbleW = 1300;
-const bubbleH = 700;
+const bubbleH = 600;
 
 //declaring original average amount of electricity generated per capita kwh for Africa
 let originalValue = 667.9646642157649;
@@ -130,7 +130,7 @@ fetch(apiUrl)
 // then we're delcaring the range to be from 10 to 200 to make it easier to work with.
         const bubbleScale = d3.scaleSqrt()
             .domain([0, d3.max(continentsObj.children, d => d.value)])
-            .range([10, 200]);
+            .range([10, 175]);
 
 
 //using foreSimulation to get collision between our continent bubbles. 
