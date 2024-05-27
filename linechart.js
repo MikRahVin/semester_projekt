@@ -1,3 +1,5 @@
+(function(){
+
 // Set the dimensions and margins of the graph
 const margin = {top: 40, right: 180, bottom: 30, left: 50},
       width = 900 - margin.left - margin.right,
@@ -77,7 +79,7 @@ d3.csv("electricity_access.csv").then(data => {
        .datum(worldData)
        .attr("class", "line")
        .attr("d", line)
-       .style("stroke", "steelblue")
+       .style("stroke", "#c4c4c4")
        .on("mousemove", (event, d) => handleMouseOver(event, d, "World", worldData))
        .on("mouseout", handleMouseOut);
 
@@ -86,7 +88,7 @@ d3.csv("electricity_access.csv").then(data => {
        .datum(subSaharanAfricaData)
        .attr("class", "line")
        .attr("d", line)
-       .style("stroke", "red")
+       .style("stroke", "steelblue")
        .on("mousemove", (event, d) => handleMouseOver(event, d, "Sub-Saharan Africa", subSaharanAfricaData))
        .on("mouseout", handleMouseOut);
 
@@ -104,17 +106,19 @@ d3.csv("electricity_access.csv").then(data => {
     // Add legend
     svg.append("text")
        .attr("x", width + 10)
-       .attr("y", 20)
+       .attr("y", 38)
        .attr("class", "legend")
-       .style("fill", "steelblue")
+       .style("fill", "#c4c4c4")
        .text("World");
 
     svg.append("text")
        .attr("x", width + 10)
-       .attr("y", 40)
+       .attr("y", 200)
        .attr("class", "legend")
-       .style("fill", "red")
+       .style("fill", "steelblue")
        .text("Sub-Saharan Africa");
 }).catch(error => {
     console.error("Error loading the CSV file:", error);
 });
+
+})();

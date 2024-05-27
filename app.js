@@ -112,8 +112,6 @@ fetch(apiUrl)
                 continent.nuclear = nuclear / continent.children.length;
                 const fossil = continent.children.reduce((acc, country) => acc + country.fossil, 0);
                 continent.fossil = fossil / continent.children.length;
-
-
             }
         });
 

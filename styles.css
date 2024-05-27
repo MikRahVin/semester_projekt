@@ -33,6 +33,7 @@ span {
 h2{
     font-size: 3.5rem;
     font-family: 'Times New Roman', Times, serif;
+    width: 1300px;
 
 }
 
@@ -94,7 +95,7 @@ h1, .container, #container3 {
 
 .fullPage {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -117,7 +118,7 @@ h1, .container, #container3 {
 
 .line {
     fill: none;
-    stroke-width: 10px;
+    stroke-width: 7px;
 }
 .legend {
     font-size: 12px;
@@ -146,10 +147,9 @@ h1, .container, #container3 {
     background-color: blue;
 }
 
-
-#fullPage3, #fullPage1{
+#container2{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #legendContainer{
