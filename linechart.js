@@ -11,15 +11,7 @@ const svg = d3.select("#container1")
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform", `translate(${margin.left},${margin.top})`);
-
-// Add title to the chart
-
-svg.append("text")
-   .attr("x", (width / 2))
-   .attr("y", -20)
-   .attr("class", "chart-title")
-   .text("Electricity Access: World vs Sub-Saharan Africa from 1998 onwards");
-
+              
 // Parse the Year / time
 const parseTime = d3.timeParse("%Y");
 
