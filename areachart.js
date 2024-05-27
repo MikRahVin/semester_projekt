@@ -58,32 +58,46 @@
         function updateChart() {
             const selectedCountry = select.property("value");
             const countryData = filteredData.filter(d => d.Entity === selectedCountry);
-
+        
             x.domain(d3.extent(countryData, d => d.Year));
             y.domain([0, d3.max(countryData, d => d.Fossil_fuel + d.Nuclear_electricity + d.Renewable_electricity)]).nice();
-
+        
             const series = stack(countryData);
-
+        
             svg.selectAll("path").remove();
             svg.selectAll("g").remove();
-
-            svg.append("g")
+        
+            const areas = svg.append("g")
                 .selectAll("path")
                 .data(series)
                 .enter().append("path")
-                .attr("fill", ({ key }) => color(key))
-                .attr("d", area)
-                .append("title")
-                .text(({ key }) => key);
-
+                .attr("fill", ({ key }) => color(key));
+        
+            // Initialize the paths at the bottom of the chart
+            areas.attr("d", area.y0(d => y(0)).y1(d => y(0)))
+                // Transition to the actual values
+                .transition()
+                .ease(d3.easeExpOut)
+                .duration(1000)  // Duration of the animation in milliseconds
+                .attr("d", area.y0(d => y(d[0])).y1(d => y(d[1])))
+                .end()
+                .then(() => {
+                    // After the animation completes, add titles
+                    areas.append("title")
+                        .text(({ key }) => key);
+                });
+        
+            // Add the x-axis
             svg.append("g")
                 .attr("transform", `translate(0,${areaH - margin.bottom})`)
                 .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0));
-
+        
+            // Add the y-axis
             svg.append("g")
                 .attr("transform", `translate(${margin.left},0)`)
                 .call(d3.axisLeft(y));
         }
+        
 
         // Initialize the chart with the first country
         select.property("value", countries[0]);
