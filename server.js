@@ -19,10 +19,10 @@ app.use(
     })
 );
 
-app.use(express.static(path.join(__dirname + "/semester_projekt")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (request, response) => {
-    response.sendFile(__dirname + "/index.html")
+    response.sendFile(path.join(__dirname, 'public', 'index.html'));
 }); 
 
 
