@@ -28,7 +28,8 @@ p {
 }
 
 span {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    color: steelblue;
 }
 
 h2{
@@ -58,7 +59,7 @@ h1, .container, #container3 {
 
 li{
     padding: 0.5rem 0;
-    width: 1300px;
+    width: 1200px;
 }
 
 .y-axis path, .y-axis line {
@@ -143,11 +144,11 @@ li{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 1300px;
+    width: 1200px;
     font-size: 1.3rem;
 }
 .infoHeader{
-    width: 1300px;
+    width: 1200px;
 }
 
 .infoHeader h3{
@@ -168,7 +169,7 @@ li{
    
 
 .infoParagraphs2{
-    width: 1300px;
+    width: 1200px;
     text-align: left;
     margin: 0;
     padding: 0.5rem 0;
@@ -217,9 +218,9 @@ li{
 
 .simpleText{
     font-size: larger;
+    line-height: 2rem;
+    color: grey;
 }
-
-
 
 
 #legendContainer{
@@ -294,7 +295,13 @@ li{
 #infoContent2{
     display: flex;
     flex-direction: column;
-    
+    width: 1200px;
 
 }
 
+#education{
+    padding-right: 1.5rem;
+}
+#health{
+    padding-left: 1.5rem;
+}
