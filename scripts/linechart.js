@@ -1,8 +1,8 @@
-(function() {
+(function () {
     // Set the dimensions and margins of the graph
-    const margin = {top: 40, right: 180, bottom: 30, left: 50},
-          width = 900 - margin.left - margin.right,
-          height = 450 - margin.top - margin.bottom;
+    const margin = { top: 40, right: 180, bottom: 30, left: 50 },
+        width = 950 - margin.left - margin.right,
+        height = 550 - margin.top - margin.bottom;
 
     // Append the svg object to the body of the page
     const svg = d3.select("#container1")
@@ -28,6 +28,9 @@
         // Filter data for "World" and "Sub-Saharan Africa"
         const worldData = data.filter(d => d.Country === "World");
         const subSaharanAfricaData = data.filter(d => d.Country === "Sub-Saharan Africa");
+
+        console.log(worldData);
+        console.log(subSaharanAfricaData);
 
         if (worldData.length === 0 || subSaharanAfricaData.length === 0) {
             console.log("No data for 'World' or 'Sub-Saharan Africa' for the selected years");
@@ -82,25 +85,42 @@
         // Observe the SVG container
         observer.observe(svg.node());
 
+        svg.append("line")
+            .attr("x1", 700)  // Starting x coordinate
+            .attr("y1", 50)  // Starting y coordinate
+            .attr("x2", 700) // Ending x coordinate
+            .attr("y2", 260) // Ending y coordinate
+            .attr("stroke", "#c4c4c4") // Line color
+            .attr("stroke-width", 2)
+            .attr("stroke-dasharray", "5,5"); // Line width
+
+            svg.append("text")
+            .attr("x", 655)
+            .attr("y", 150)
+            .attr("class", "addedInfo")
+            .style("fill", "#9c9c9c")
+            .text("42%");
+
         // Add the X Axis
         svg.append("g")
             .attr("class", "x-axis")
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x));
 
+           
         // Add the Y Axis
         svg.append("g")
             .attr("class", "y-axis")
             .call(d3.axisLeft(y));
 
-            svg.append("text")
+        svg.append("text")
             .attr("x", width + 10)
             .attr("y", 38)
             .attr("class", "legend")
             .style("fill", "hsl(207, 44%, 75%)")
             .text("World");
-     
-         svg.append("text")
+
+        svg.append("text")
             .attr("x", width + 10)
             .attr("y", 200)
             .attr("class", "legend")
