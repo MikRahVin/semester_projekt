@@ -16,7 +16,7 @@
     const parseTime = d3.timeParse("%Y");
 
     // Load the CSV file
-    d3.csv("electricity_access.csv").then(data => {
+    d3.csv("/data/electricity_access.csv").then(data => {
         data.forEach(d => {
             d.Year = parseTime(d.Year);
             d.Value = +d.Value;
