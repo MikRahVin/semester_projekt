@@ -75,7 +75,7 @@
                 .attr("stroke-dashoffset", totalLength)
                 .transition()
                 .duration(2000)
-                .ease(d3.easeLinear)
+                .ease(d3.easeCubicOut)
                 .attr("stroke-dashoffset", 0);
         }
 
@@ -92,6 +92,20 @@
         svg.append("g")
             .attr("class", "y-axis")
             .call(d3.axisLeft(y));
+
+            svg.append("text")
+            .attr("x", width + 10)
+            .attr("y", 38)
+            .attr("class", "legend")
+            .style("fill", "hsl(207, 44%, 75%)")
+            .text("World");
+     
+         svg.append("text")
+            .attr("x", width + 10)
+            .attr("y", 200)
+            .attr("class", "legend")
+            .style("fill", "steelblue")
+            .text("Sub-Saharan Africa");
 
     }).catch(error => {
         console.error("Error loading the CSV file:", error);

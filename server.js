@@ -18,6 +18,8 @@ app.use(
     })
 );
 
+app.use(express.static(__dirname + "/semester_project"));
+
 app.get("/", (request, response) => {
     response.sendFile(__dirname + "/index.html")
 }); 
