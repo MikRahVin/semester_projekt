@@ -21,8 +21,9 @@ h1 {
 }
 
 p {
-    margin: 3rem;
+    margin: 1rem;
     width: 20rem;
+    
     
 }
 
@@ -34,6 +35,11 @@ h2{
     font-size: 3rem;
     width: 1300px;
 
+}
+
+h3{
+    font-size: 1.3rem;
+    width: 1300rem;
 }
 
 select{
@@ -48,6 +54,26 @@ select{
 
 h1, .container, #container3 {
     max-width: 100%;
+}
+
+li{
+    padding: 0.5rem 0;
+    width: 1300px;
+}
+
+.y-axis path, .y-axis line {
+    stroke: #9c9c9c; /* Change the color of the axis line */
+}
+
+.y-axis text {
+    fill: #9c9c9c; /* Change the color of the axis labels */
+}
+.x-axis path, .x-axis line {
+    stroke: #9c9c9c; /* Change the color of the axis line */
+}
+
+.x-axis text {
+    fill: #9c9c9c; /* Change the color of the axis labels */
 }
 
 .infoSection, #blackout {
@@ -99,12 +125,55 @@ h1, .container, #container3 {
     justify-content: center;
     width: 100%;
     padding: 4rem 0;
+    margin: 5rem 0;
 }
 
 .infoSection {
-    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     background-color: whitesmoke;
+    justify-content: center;
+    padding: 3rem 0;
+    line-height: 1.8rem;
+}
+
+.infoContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 1300px;
+    font-size: 1.3rem;
+}
+.infoHeader{
+    width: 1300px;
+}
+
+.infoHeader h3{
+    font-size: 2rem;
+}
+
+
+.infoText{
+    width: 600px;
+}
+
+.infoParagraphs{
+    width: 600px;
+    text-align: left;
+    margin: 0;
+    padding: 0.5rem 0;
+}
+   
+
+.infoParagraphs2{
+    width: 1300px;
+    text-align: left;
+    margin: 0;
+    padding: 0.5rem 0;
+    
+   
 }
 
 .container {
@@ -144,6 +213,10 @@ h1, .container, #container3 {
 
 .instructions{
     background-color: blue;
+}
+
+.simpleText{
+    font-size: larger;
 }
 
 
@@ -197,7 +270,7 @@ h1, .container, #container3 {
 
 #container3 svg {
     align-content: center;
-    background-color: whitesmoke;
+    background-color: #fefefe;
     margin: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 15px #c2c2c2;
@@ -215,5 +288,13 @@ h1, .container, #container3 {
 
 #container2{
     justify-content: space-evenly;
+}
+
+
+#infoContent2{
+    display: flex;
+    flex-direction: column;
+    
+
 }
 

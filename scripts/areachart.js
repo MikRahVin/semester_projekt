@@ -1,6 +1,6 @@
 (function () {
-    const areaW = 900;
-    const areaH = 450;
+    const areaW = 950;
+    const areaH = 550;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
 
     d3.csv("/data/energymix.csv").then(data => {
@@ -40,7 +40,7 @@
             .offset(d3.stackOffsetNone);
 
         // List of specific countries to display
-        const specificCountries = ["Africa", "Asia", "South America", "North America", "Oceania", "Australia"];
+        const specificCountries = ["Africa", "Asia", "South America", "North America", "Oceania", "Australia", "Europe", "World"];
 
         // Filter data for specific countries
         const filteredData = data.filter(d => specificCountries.includes(d.Entity));
@@ -90,11 +90,13 @@
             // Add the x-axis
             svg.append("g")
                 .attr("transform", `translate(0,${areaH - margin.bottom})`)
+                .attr("class", "x-axis")
                 .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0));
         
             // Add the y-axis
             svg.append("g")
                 .attr("transform", `translate(${margin.left},0)`)
+                .attr("class", "y-axis")
                 .call(d3.axisLeft(y));
         }
         
