@@ -3,7 +3,7 @@
     const areaH = 550;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
 
-    d3.csv("/data/energymix.csv").then(data => {
+    d3.csv("/public/data/energymix.csv").then(data => {
         // Convert data types
         data.forEach(d => {
             d.Year = +d.Year;

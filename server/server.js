@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./queries");
 const cors = require('cors');
-const path = require("path");
 const port = process.env.PORT || 4000;
 
 require("dotenv").config();
@@ -19,9 +18,12 @@ app.use(
     })
 );
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, '../public')))
+
 
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, 'index.html'));
+    response.sendFile(path.join(__dirname, '../public/pages/index.html'));
 }); 
 
 
