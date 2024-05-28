@@ -40,7 +40,8 @@ h2{
 
 h3{
     font-size: 1.3rem;
-    width: 1300rem;
+    width: 600px;
+    max-width: 600px ;
 }
 
 select{
@@ -304,4 +305,8 @@ li{
 }
 #health{
     padding-left: 1.5rem;
+}
+
+#infoHeader1{
+    width:1200px;
 }
