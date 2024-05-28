@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./queries");
 const cors = require('cors');
+const path = require("path");
 const port = process.env.PORT || 4000;
 
 require("dotenv").config();
@@ -18,7 +19,7 @@ app.use(
     })
 );
 
-app.use(express.static(__dirname + "/semester_project"));
+app.use(express.static(path.join(__dirname + "/semester_projekt")));
 
 app.get("/", (request, response) => {
     response.sendFile(__dirname + "/index.html")
