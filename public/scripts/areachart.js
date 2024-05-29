@@ -2,15 +2,13 @@
     const areaW = 950;
     const areaH = 550;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
-    let selectedCountry = "Africa";
     const africaBtn = document.querySelector("#africaBtn")
     const asiaBtn = document.querySelector("#asiaBtn")
     const southAmericaBtn = document.querySelector("#southAmericaBtn")
-    const nothAmericaBtn = document.querySelector("#nothAmericaBtn")
+    const northAmericaBtn = document.querySelector("#nothAmericaBtn")
     const oceaniaBtn = document.querySelector("#oceaniaBtn")
     const europeBtn = document.querySelector("#europeBtn")
-    const Btn = document.querySelector("#")
-    const Btn = document.querySelector("#")
+    const worldBtn = document.querySelector("#worldBtn")
 
     d3.csv("/public/data/energymix.csv").then(data => {
         // Convert data types
@@ -49,10 +47,10 @@
             .offset(d3.stackOffsetNone);
 
         // List of specific countries to display
-        const specificCountries = ["Africa", "Asia", "South America", "North America", "Oceania", "Europe", "World"];
+        const specificContinents = ["Africa", "Asia", "South America", "North America", "Oceania", "Europe", "World"];
 
         // Filter data for specific countries
-        const filteredData = data.filter(d => specificCountries.includes(d.Entity));
+        const filteredData = data.filter(d => specificContinents.includes(d.Entity));
 
         // Get unique list of filtered countries
         const countries = Array.from(new Set(filteredData.map(d => d.Entity)));
@@ -65,8 +63,7 @@
         select.on("change", updateChart);
 
         function updateChart() {
-            selectedCountry = select.property("value");
-            const countryData = filteredData.filter(d => d.Entity === selectedCountry);
+            const countryData = filteredData.filter(d => d.Entity === selectedContinent);
         
             x.domain(d3.extent(countryData, d => d.Year));
             y.domain([0, d3.max(countryData, d => d.Fossil_fuel + d.Nuclear_electricity + d.Renewable_electricity)]).nice();
@@ -109,10 +106,41 @@
                 .call(d3.axisLeft(y));
         }
         
-
+        window.addEventListener("onload", () => {
+            selectedContinent = "Africa";
+            return updateChart();
+        } )
+        africaBtn.addEventListener("click", () => {
+            selectedContinent = "Africa";
+            return updateChart();
+        } )
+        asiaBtn.addEventListener("click", () => {
+            selectedContinent = "Asia";
+            return updateChart();
+        } )
+        southAmericaBtn.addEventListener("click", () => {
+            selectedContinent = "South America";
+            return updateChart();
+        } )
+        northAmericaBtn.addEventListener("click", () => {
+            selectedContinent = "North America";
+            return updateChart();
+        } )
+        oceaniaBtn.addEventListener("click", () => {
+            selectedContinent = "Oceania";
+            return updateChart();
+        } )
+        europeBtn.addEventListener("click", () => {
+            selectedContinent = "Europe";
+            return updateChart();
+        } )
+        worldBtn.addEventListener("click", () => {
+            selectedContinent = "World";
+            return updateChart();
+        } )
         
         // Initialize the chart with the first country
-        select.property("value", countries[0]);
+        let selectedContinent = "Africa";
         updateChart();
     });
 
