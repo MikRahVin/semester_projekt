@@ -59,24 +59,30 @@
             y.domain([0, 100]);  // Set y domain from 0 to 100 for percentage
         
             const series = stack(continentData);
+
+            // Add transition
+            const t = svg.transition().duration(750);
         
-            svg.selectAll("path").remove();
-            svg.selectAll("g").remove();
-        
-            const areas = svg.append("g")
-                .selectAll("path")
-                .data(series)
-                .enter().append("path")
+            const areas = svg.selectAll("path")
+                .data(series);
+
+            areas.enter().append("path")
                 .attr("fill", ({ key }) => color(key))
+                .merge(areas)  // Merge the new and existing elements
+                .transition(t) // Apply transition
                 .attr("d", area);
 
-            // Add the x-axis
+            areas.exit().remove();
+        
+            // Update the x-axis
+            svg.selectAll(".x-axis").remove();
             svg.append("g")
                 .attr("transform", `translate(0,${areaH - margin.bottom - margin.top})`)
                 .attr("class", "x-axis")
-                .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0));
+                .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0).tickFormat(d3.format("d")));
         
-            // Add the y-axis
+            // Update the y-axis
+            svg.selectAll(".y-axis").remove();
             svg.append("g")
                 .attr("transform", `translate(0,0)`)
                 .attr("class", "y-axis")
