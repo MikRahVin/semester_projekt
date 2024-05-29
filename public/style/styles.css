@@ -118,6 +118,7 @@ li{
 /* Style the dropdown items on hover */
 .select-items div:hover {
     background-color: #ececec;
+    width: 8rem;
 }
 
 .fullPage {
