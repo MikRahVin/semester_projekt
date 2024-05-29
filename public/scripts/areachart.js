@@ -19,18 +19,21 @@
             d.Renewable_electricity = +d.Renewable_electricity;
         });
 
+        // Log the loaded data
+        console.log("Loaded Data: ", data);
+
         const svg = d3.select("#areaChart")
             .attr("width", areaW)
-            .attr("height", areaH + margin.bottom)
+            .attr("height", areaH + margin.bottom)  
             .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
         const x = d3.scaleLinear()
             .range([margin.left, areaW - margin.right]);
 
         const y = d3.scaleLinear()
             .range([areaH - margin.bottom, margin.top])
-            .domain([0, 100]);
+            .domain([0, 100]); // Set y-axis range from 0 to 100%
 
         const color = d3.scaleOrdinal()
             .domain(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
@@ -38,19 +41,22 @@
 
         const area = d3.area()
             .x(d => x(d.data.Year))
-            .y0(d => y(d[0] * 100))
-            .y1(d => y(d[1] * 100));
+            .y0(d => y(d[0] * 100))  // Multiply by 100 for percentage
+            .y1(d => y(d[1] * 100)); // Multiply by 100 for percentage
 
         const stack = d3.stack()
             .keys(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
             .order(d3.stackOrderNone)
-            .offset(d3.stackOffsetExpand);
+            .offset(d3.stackOffsetExpand); // Normalize the stack to 100%
 
         // List of specific countries to display
         const specificContinents = ["Africa", "Asia", "South America", "North America", "Oceania", "Europe", "World"];
 
         // Filter data for specific countries
         const filteredData = data.filter(d => specificContinents.includes(d.Entity));
+
+        // Log filtered data
+        console.log("Filtered Data: ", filteredData);
 
         // Get unique list of filtered countries
         const countries = Array.from(new Set(filteredData.map(d => d.Entity)));
@@ -69,10 +75,12 @@
 
         function updateChart() {
             const continentData = filteredData.filter(d => d.Entity === selectedContinent);
+            console.log("Continent Data: ", continentData);
 
             x.domain(d3.extent(continentData, d => d.Year));
 
             const series = stack(continentData);
+            console.log("Stacked Series: ", series);
 
             svg.selectAll("path").remove();
             svg.selectAll(".x-axis").remove();
@@ -108,9 +116,10 @@
             svg.append("g")
                 .attr("transform", `translate(${margin.left},0)`)
                 .attr("class", "y-axis")
-                .call(d3.axisLeft(y).ticks(10).tickFormat(d => d + '%'));
+                .call(d3.axisLeft(y).tickFormat(d => d + "%"));
         }
 
+        // Add event listeners to buttons
         africaBtn.addEventListener("click", () => {
             selectedContinent = "Africa";
             updateChart();
@@ -142,5 +151,8 @@
 
         // Initialize the chart with the first country
         updateChart();
+    }).catch(error => {
+        console.error("Error loading or parsing data: ", error);
     });
+
 })();
