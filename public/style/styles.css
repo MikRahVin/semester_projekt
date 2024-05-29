@@ -223,6 +223,9 @@ li{
     color: grey;
 }
 
+.info1list{
+    width: 600px;
+}
 
 #legendContainer{
     display: flex;
