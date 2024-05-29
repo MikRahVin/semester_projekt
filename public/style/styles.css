@@ -178,6 +178,10 @@ li{
    
 }
 
+.info1List{
+    width: 600px;
+}
+
 .container {
     display: flex;
     align-items: center;
@@ -309,4 +313,8 @@ li{
 
 #infoHeader1{
     width:1200px;
+}
+
+#educationList{
+    width: 600px;
 }
