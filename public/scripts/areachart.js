@@ -10,7 +10,6 @@
     const europeBtn = document.querySelector("#europeBtn");
     const worldBtn = document.querySelector("#worldBtn");
 
-
     d3.csv("/data/energymix.csv").then(data => {
         // Convert data types
         data.forEach(d => {
@@ -21,11 +20,10 @@
         });
 
         const svg = d3.select("#areaChart")
-        .attr("width", areaW)
-        .attr("height", areaH + margin.bottom)  
-        .append("g")
-        .attr("transform", `translate(${margin.top})`);
-
+            .attr("width", areaW)
+            .attr("height", areaH + margin.bottom)  
+            .append("g")
+            .attr("transform", `translate(${margin.top})`);
 
         const x = d3.scaleLinear()
             .range([margin.left, areaW - margin.right]);
@@ -61,10 +59,14 @@
             .enter().append("option")
             .text(d => d);
 
-        select.on("change", updateChart);
+        let selectedContinent = "Africa";
+
+        select.on("change", function() {
+            selectedContinent = this.value;
+            updateChart();
+        });
 
         function updateChart() {
-            let selectedContinent = "Africa";
             const continentData = filteredData.filter(d => d.Entity === selectedContinent);
         
             x.domain(d3.extent(continentData, d => d.Year));
@@ -73,7 +75,8 @@
             const series = stack(continentData);
         
             svg.selectAll("path").remove();
-            svg.selectAll("g").remove();
+            svg.selectAll(".x-axis").remove();
+            svg.selectAll(".y-axis").remove();
         
             const areas = svg.append("g")
                 .selectAll("path")
@@ -99,7 +102,7 @@
             svg.append("g")
                 .attr("transform", `translate(0,${areaH - margin.bottom})`)
                 .attr("class", "x-axis")
-                .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0));
+                .call(d3.axisBottom(x).ticks(areaW / 80).tickFormat(d3.format("d")).tickSizeOuter(0));
         
             // Add the y-axis
             svg.append("g")
@@ -108,37 +111,37 @@
                 .call(d3.axisLeft(y));
         }
         
+        
         africaBtn.addEventListener("click", () => {
             selectedContinent = "Africa";
-            return updateChart();
-        } )
+            updateChart();
+        });
         asiaBtn.addEventListener("click", () => {
             selectedContinent = "Asia";
-            return updateChart();
-        } )
+            updateChart();
+        });
         southAmericaBtn.addEventListener("click", () => {
             selectedContinent = "South America";
-            return updateChart();
-        } )
+            updateChart();
+        });
         northAmericaBtn.addEventListener("click", () => {
             selectedContinent = "North America";
-            return updateChart();
-        } )
+            updateChart();
+        });
         oceaniaBtn.addEventListener("click", () => {
             selectedContinent = "Oceania";
-            return updateChart();
-        } )
+            updateChart();
+        });
         europeBtn.addEventListener("click", () => {
             selectedContinent = "Europe";
-            return updateChart();
-        } )
+            updateChart();
+        });
         worldBtn.addEventListener("click", () => {
             selectedContinent = "World";
-            return updateChart();
-        } )
+            updateChart();
+        });
         
         // Initialize the chart with the first country
-        let selectedContinent = "Africa";
         updateChart();
     });
 
