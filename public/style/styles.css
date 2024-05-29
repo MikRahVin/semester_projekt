@@ -106,6 +106,7 @@ li{
     border-radius: 4px;
     z-index: 1;
     width: 100%;
+    width: 20rem;
 }
  
 /* Style the dropdown items */
@@ -118,8 +119,8 @@ li{
 /* Style the dropdown items on hover */
 .select-items div:hover {
     background-color: #ececec;
-    width: 8rem;
 }
+
 
 .fullPage {
     display: flex;
