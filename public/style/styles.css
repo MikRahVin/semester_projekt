@@ -88,6 +88,8 @@ li{
     margin: 15px;
     box-shadow: 2px 2px 15px #c2c2c2;
     border-radius: 8px;
+    width: 17rem;
+    text-align: center;
 }
  
 .select-selected {
