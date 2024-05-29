@@ -73,8 +73,6 @@ fetch(apiUrl)
             i++;
         }
 
-        console.log(continentObjs);
-
 
         // Declaring our svg for the bubble chart. The height and width is set to be our variables that we declared at the top of our script
         const svg3 = d3.select("#container3")
@@ -202,10 +200,6 @@ fetch(apiUrl)
                 setEnergy(energyValues[index] + originalValue);
             });
         });
-
-
-
-
 
     })
     .catch(error => {

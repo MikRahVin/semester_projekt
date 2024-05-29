@@ -227,15 +227,26 @@ li{
     width: 600px;
 }
 
-#legendContainer{
+.legendContainer{
     display: flex;
     justify-content: right;
     width: 1300px;
 }
 
-#legend{
-    color: grey;
-    width: 30dvw;
+#legendContainerMid{
+    display: flex;
+    justify-content:right;
+    width:1300px;
+    padding-right: 650px;
+}
+
+#legendContainer1{
+    padding-right: 200px;
+}
+
+#legend, #legend2, #legend3{
+    color: #9c9c9c;
+    width: 25rem;
     margin-bottom: 1rem;
 }
 
