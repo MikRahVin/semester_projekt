@@ -2,13 +2,14 @@
     const areaW = 950;
     const areaH = 550;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
-    const africaBtn = document.querySelector("#africaBtn")
-    const asiaBtn = document.querySelector("#asiaBtn")
-    const southAmericaBtn = document.querySelector("#southAmericaBtn")
-    const northAmericaBtn = document.querySelector("#nothAmericaBtn")
-    const oceaniaBtn = document.querySelector("#oceaniaBtn")
-    const europeBtn = document.querySelector("#europeBtn")
-    const worldBtn = document.querySelector("#worldBtn")
+    const africaBtn = document.querySelector("#africaBtn");
+    const asiaBtn = document.querySelector("#asiaBtn");
+    const southAmericaBtn = document.querySelector("#southAmericaBtn");
+    const northAmericaBtn = document.querySelector("#northAmericaBtn");
+    const oceaniaBtn = document.querySelector("#oceaniaBtn");
+    const europeBtn = document.querySelector("#europeBtn");
+    const worldBtn = document.querySelector("#worldBtn");
+
 
     d3.csv("/data/energymix.csv").then(data => {
         // Convert data types
@@ -63,6 +64,7 @@
         select.on("change", updateChart);
 
         function updateChart() {
+            let selectedContinent = "Africa";
             const countryData = filteredData.filter(d => d.Entity === selectedContinent);
         
             x.domain(d3.extent(countryData, d => d.Year));
@@ -106,10 +108,6 @@
                 .call(d3.axisLeft(y));
         }
         
-        window.addEventListener("onload", () => {
-            selectedContinent = "Africa";
-            return updateChart();
-        } )
         africaBtn.addEventListener("click", () => {
             selectedContinent = "Africa";
             return updateChart();
