@@ -11,7 +11,7 @@ const pool = new Pool({
 
 //route for /foods
 const getEnergy = (request, response) => {
-    pool.query("SELECT * FROM energy_access_and_mix", (error, results) => {
+    pool.query("SELECT * FROM continent_mix", (error, results) => {
       if (error) {
         throw error;
       }

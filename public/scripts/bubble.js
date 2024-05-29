@@ -15,8 +15,6 @@ const bubbleH = 600;
 let originalValue = 667.9646642157649;
 
 
-
-
 // GIVING FUNCTONALITY TO OUR CUSTOM DROPDOWNS
 // Attach click event listeners to each custom selector
 customSelects.forEach(function (select) {
