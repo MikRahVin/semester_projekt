@@ -2,6 +2,15 @@
     const areaW = 950;
     const areaH = 550;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
+    let selectedCountry = "Africa";
+    const africaBtn = document.querySelector("#africaBtn")
+    const asiaBtn = document.querySelector("#asiaBtn")
+    const southAmericaBtn = document.querySelector("#southAmericaBtn")
+    const nothAmericaBtn = document.querySelector("#nothAmericaBtn")
+    const oceaniaBtn = document.querySelector("#oceaniaBtn")
+    const europeBtn = document.querySelector("#europeBtn")
+    const Btn = document.querySelector("#")
+    const Btn = document.querySelector("#")
 
     d3.csv("/public/data/energymix.csv").then(data => {
         // Convert data types
@@ -40,7 +49,7 @@
             .offset(d3.stackOffsetNone);
 
         // List of specific countries to display
-        const specificCountries = ["Africa", "Asia", "South America", "North America", "Oceania", "Australia", "Europe", "World"];
+        const specificCountries = ["Africa", "Asia", "South America", "North America", "Oceania", "Europe", "World"];
 
         // Filter data for specific countries
         const filteredData = data.filter(d => specificCountries.includes(d.Entity));
@@ -56,7 +65,7 @@
         select.on("change", updateChart);
 
         function updateChart() {
-            const selectedCountry = select.property("value");
+            selectedCountry = select.property("value");
             const countryData = filteredData.filter(d => d.Entity === selectedCountry);
         
             x.domain(d3.extent(countryData, d => d.Year));
@@ -101,6 +110,7 @@
         }
         
 
+        
         // Initialize the chart with the first country
         select.property("value", countries[0]);
         updateChart();
