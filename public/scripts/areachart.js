@@ -10,7 +10,7 @@
     const europeBtn = document.querySelector("#europeBtn")
     const worldBtn = document.querySelector("#worldBtn")
 
-    d3.csv("/public/data/energymix.csv").then(data => {
+    d3.csv("/data/energymix.csv").then(data => {
         // Convert data types
         data.forEach(d => {
             d.Year = +d.Year;
