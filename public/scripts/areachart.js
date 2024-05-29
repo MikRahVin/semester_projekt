@@ -9,7 +9,9 @@
     const oceaniaBtn = document.querySelector("#oceaniaBtn");
     const europeBtn = document.querySelector("#europeBtn");
     const worldBtn = document.querySelector("#worldBtn");
-
+    
+    // Initially selected continent
+    let selectedContinent = "Africa"; // Moved this line up for global access within this function
 
     d3.csv("/data/energymix.csv").then(data => {
         // Convert data types
@@ -21,17 +23,16 @@
         });
 
         const svg = d3.select("#areaChart")
-        .attr("width", areaW)
-        .attr("height", areaH + margin.bottom)  
-        .append("g")
-        .attr("transform", `translate(${margin.top})`);
-
+            .attr("width", areaW)
+            .attr("height", areaH + margin.bottom)  
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleLinear()
-            .range([margin.left, areaW - margin.right]);
+            .range([0, areaW - margin.left - margin.right]);
 
         const y = d3.scaleLinear()
-            .range([areaH - margin.bottom, margin.top]);
+            .range([areaH - margin.top - margin.bottom, 0]);
 
         const color = d3.scaleOrdinal()
             .domain(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
@@ -39,38 +40,25 @@
 
         const area = d3.area()
             .x(d => x(d.data.Year))
-            .y0(d => y(d[0]))
-            .y1(d => y(d[1]));
+            .y0(d => y(d[0] * 100))
+            .y1(d => y(d[1] * 100));
 
         const stack = d3.stack()
             .keys(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
             .order(d3.stackOrderNone)
-            .offset(d3.stackOffsetNone);
+            .offset(d3.stackOffsetExpand); // Change offset to fill the chart
 
-        // List of specific countries to display
+        // Filter data for specific continents
         const specificContinents = ["Africa", "Asia", "South America", "North America", "Oceania", "Europe", "World"];
-
-        // Filter data for specific countries
         const filteredData = data.filter(d => specificContinents.includes(d.Entity));
 
-        // Get unique list of filtered countries
-        const countries = Array.from(new Set(filteredData.map(d => d.Entity)));
-        const select = d3.select("#countrySelect");
-        select.selectAll("option")
-            .data(countries)
-            .enter().append("option")
-            .text(d => d);
-
-        select.on("change", updateChart);
-
         function updateChart() {
-            let selectedContinent = "Africa";
-            const countryData = filteredData.filter(d => d.Entity === selectedContinent);
+            const continentData = filteredData.filter(d => d.Entity === selectedContinent);
         
-            x.domain(d3.extent(countryData, d => d.Year));
-            y.domain([0, d3.max(countryData, d => d.Fossil_fuel + d.Nuclear_electricity + d.Renewable_electricity)]).nice();
+            x.domain(d3.extent(continentData, d => d.Year));
+            y.domain([0, 100]);  // Set y domain from 0 to 100 for percentage
         
-            const series = stack(countryData);
+            const series = stack(continentData);
         
             svg.selectAll("path").remove();
             svg.selectAll("g").remove();
@@ -79,66 +67,32 @@
                 .selectAll("path")
                 .data(series)
                 .enter().append("path")
-                .attr("fill", ({ key }) => color(key));
-        
-            // Initialize the paths at the bottom of the chart
-            areas.attr("d", area.y0(d => y(0)).y1(d => y(0)))
-                // Transition to the actual values
-                .transition()
-                .ease(d3.easeExpOut)
-                .duration(1000)  // Duration of the animation in milliseconds
-                .attr("d", area.y0(d => y(d[0])).y1(d => y(d[1])))
-                .end()
-                .then(() => {
-                    // After the animation completes, add titles
-                    areas.append("title")
-                        .text(({ key }) => key);
-                });
-        
+                .attr("fill", ({ key }) => color(key))
+                .attr("d", area);
+
             // Add the x-axis
             svg.append("g")
-                .attr("transform", `translate(0,${areaH - margin.bottom})`)
+                .attr("transform", `translate(0,${areaH - margin.bottom - margin.top})`)
                 .attr("class", "x-axis")
                 .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0));
         
             // Add the y-axis
             svg.append("g")
-                .attr("transform", `translate(${margin.left},0)`)
+                .attr("transform", `translate(0,0)`)
                 .attr("class", "y-axis")
-                .call(d3.axisLeft(y));
+                .call(d3.axisLeft(y).tickFormat(d => d + "%"));
         }
         
-        africaBtn.addEventListener("click", () => {
-            selectedContinent = "Africa";
-            return updateChart();
-        } )
-        asiaBtn.addEventListener("click", () => {
-            selectedContinent = "Asia";
-            return updateChart();
-        } )
-        southAmericaBtn.addEventListener("click", () => {
-            selectedContinent = "South America";
-            return updateChart();
-        } )
-        northAmericaBtn.addEventListener("click", () => {
-            selectedContinent = "North America";
-            return updateChart();
-        } )
-        oceaniaBtn.addEventListener("click", () => {
-            selectedContinent = "Oceania";
-            return updateChart();
-        } )
-        europeBtn.addEventListener("click", () => {
-            selectedContinent = "Europe";
-            return updateChart();
-        } )
-        worldBtn.addEventListener("click", () => {
-            selectedContinent = "World";
-            return updateChart();
-        } )
+        // Event listeners for buttons
+        africaBtn.addEventListener("click", () => { selectedContinent = "Africa"; updateChart(); });
+        asiaBtn.addEventListener("click", () => { selectedContinent = "Asia"; updateChart(); });
+        southAmericaBtn.addEventListener("click", () => { selectedContinent = "South America"; updateChart(); });
+        northAmericaBtn.addEventListener("click", () => { selectedContinent = "North America"; updateChart(); });
+        oceaniaBtn.addEventListener("click", () => { selectedContinent = "Oceania"; updateChart(); });
+        europeBtn.addEventListener("click", () => { selectedContinent = "Europe"; updateChart(); });
+        worldBtn.addEventListener("click", () => { selectedContinent = "World"; updateChart(); });
         
-        // Initialize the chart with the first country
-        let selectedContinent = "Africa";
+        // Initialize the chart
         updateChart();
     });
 
