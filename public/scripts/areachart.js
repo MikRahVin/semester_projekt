@@ -89,6 +89,13 @@
                 .call(d3.axisLeft(y).tickFormat(d => d + "%"));
         }
         
+        svg.append("text")
+        .attr("x", 0)
+        .attr("y", areaH - 10)
+        .attr("class", "addedInfo")
+        .style("fill", "#9c9c9c")
+        .text("Years");
+        
         // Event listeners for buttons
         africaBtn.addEventListener("click", () => { selectedContinent = "Africa"; updateChart(); });
         asiaBtn.addEventListener("click", () => { selectedContinent = "Asia"; updateChart(); });
