@@ -65,12 +65,12 @@
 
         function updateChart() {
             let selectedContinent = "Africa";
-            const countryData = filteredData.filter(d => d.Entity === selectedContinent);
+            const continentData = filteredData.filter(d => d.Entity === selectedContinent);
         
-            x.domain(d3.extent(countryData, d => d.Year));
-            y.domain([0, d3.max(countryData, d => d.Fossil_fuel + d.Nuclear_electricity + d.Renewable_electricity)]).nice();
+            x.domain(d3.extent(continentData, d => d.Year));
+            y.domain([0, d3.max(continentData, d => d.Fossil_fuel + d.Nuclear_electricity + d.Renewable_electricity)]).nice();
         
-            const series = stack(countryData);
+            const series = stack(continentData);
         
             svg.selectAll("path").remove();
             svg.selectAll("g").remove();
