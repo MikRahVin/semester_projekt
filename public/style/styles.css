@@ -318,3 +318,9 @@ li{
 #educationList{
     width: 600px;
 }
+
+#dropdownArrow{
+    background-color: #fefefe;
+    height: 13px;
+    width: 13px;
+}
