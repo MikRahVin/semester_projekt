@@ -8,8 +8,8 @@ const solarBtn3 = document.querySelector("#solarBtn3");
 let customSelects = document.querySelectorAll('.custom-select');
 
 // declaring height and width of our data visualization as variables, so that if we want to change them, we only need to change the values here.
-let bubbleW = 1200;
-const bubbleH = 600;
+let bubbleW = 350;
+const bubbleH = 500;
 
 //declaring original average amount of electricity generated per capita kwh for Africa
 let originalValue = 667.9646642157649;
@@ -74,8 +74,8 @@ fetch(apiUrl)
         }
 
 
-        // Declaring our svg for the bubble chart. The height and width is set to be our variables that we declared at the top of our script
-        const svg3 = d3.select("#container3")
+        // Declaring our bubbleSvg for the bubble chart. The height and width is set to be our variables that we declared at the top of our script
+        const bubbleSvg3 = d3.select("#container3")
             .append("svg")
             .attr("width", bubbleW)
             .attr("height", bubbleH);
@@ -85,7 +85,7 @@ fetch(apiUrl)
         // Then we're declaring the range to be from 10 to 200 to make it easier to work with.
         const bubbleScale = d3.scaleSqrt()
             .domain([0, d3.max(continentObjs, d => d.value)])
-            .range([10, 175]);
+            .range([0, 80]);
 
         // Using forceSimulation to get collision between our continent bubbles.
         let simulation = d3.forceSimulation(continentObjs)
@@ -95,7 +95,7 @@ fetch(apiUrl)
             .on("tick", ticked);
 
         // Appending each bubble
-        const bubbles = svg3.selectAll("circle")
+        const bubbles = bubbleSvg3.selectAll("circle")
             .data(continentObjs)
             .enter()
             .append("circle")
@@ -114,7 +114,7 @@ fetch(apiUrl)
                 .on("end", dragended));
 
         // Append labels to each bubble and set their x and y values to the center of the bubbles.
-        const labels = svg3.selectAll("g")
+        const labels = bubbleSvg3.selectAll("g")
             .data(continentObjs)
             .enter().append("g")
             .attr("class", "label-group")
@@ -124,8 +124,8 @@ fetch(apiUrl)
         // Append continent names
         labels.append("text")
             .attr("class", "continent-label")
-            .attr("dy", "-12px")  // Adjusted to move up
-            .attr("font-size", "18px")
+            .attr("dy", "-6px")  // Adjusted to move up
+            .attr("font-size", "10px")
             .style("font-weight", d => d.continent === "Africa" ? "bold" : "")
             .style("fill", "#fff")
             .text(d => d.continent);
@@ -133,8 +133,8 @@ fetch(apiUrl)
         // Append values
         labels.append("text")
             .attr("class", "value-label")
-            .attr("dy", "12px")  // Adjusted to move down
-            .attr("font-size", "18px")
+            .attr("dy", "6px")  // Adjusted to move down
+            .attr("font-size", "10px")
             .style("fill", "#fff")
             .text(d => `${Math.round(d.value)} kWh`);
 
@@ -179,7 +179,7 @@ fetch(apiUrl)
             labels.filter(d => d.continent === "Africa").select(".value-label")
                 .text(d => `${Math.round(d.value)} kWh`);
 
-            svg3.select("#africaCircle")
+            bubbleSvg3.select("#africaCircle")
                 .transition()
                 .ease(d3.easeElastic)
                 .duration(700)

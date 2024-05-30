@@ -1,14 +1,17 @@
-(function () {
-    const areaW = 950;
-    const areaH = 500;
-    const margin = { top: 20, right: 30, bottom: 30, left: 60 };
-    const africaBtn = document.querySelector("#africaBtn");
+const africaBtn = document.querySelector("#africaBtn");
     const asiaBtn = document.querySelector("#asiaBtn");
     const southAmericaBtn = document.querySelector("#southAmericaBtn");
     const northAmericaBtn = document.querySelector("#northAmericaBtn");
     const oceaniaBtn = document.querySelector("#oceaniaBtn");
     const europeBtn = document.querySelector("#europeBtn");
     const worldBtn = document.querySelector("#worldBtn");
+
+(function () {
+    const margin = { top: 70, right: 30, bottom: 30, left: 60 };
+    const areaW = 370;
+    const areaH = 500 - margin.top;
+    
+    
 
 
     
@@ -24,7 +27,7 @@
             d.Renewable_electricity = +d.Renewable_electricity;
         });
 
-        const svg = d3.select("#areaChart")
+        const AreaSvg = d3.select("#areaChart")
             .attr("width", areaW)
             .attr("height", areaH + margin.bottom)  
             .append("g")
@@ -38,7 +41,7 @@
 
         const color = d3.scaleOrdinal()
             .domain(["Fossil_fuel", "Nuclear_electricity", "Renewable_electricity"])
-            .range(["hsl(207, 44%, 75%)", "hsl(207, 44%, 65%)", "hsl(207, 44%, 49%)"]);
+            .range(["hsl(207, 44%, 90%)", "hsl(207, 44%, 75%)", "hsl(207, 44%, 49%)"]);
 
         const area = d3.area()
             .x(d => x(d.data.Year))
@@ -63,9 +66,9 @@
             const series = stack(continentData);
 
             // Add transition
-            const t = svg.transition().duration(750);
+            const t = AreaSvg.transition().duration(750);
         
-            const areas = svg.selectAll("path")
+            const areas = AreaSvg.selectAll("path")
                 .data(series);
 
             areas.enter().append("path")
@@ -77,21 +80,42 @@
             areas.exit().remove();
         
             // Update the x-axis
-            svg.selectAll(".x-axis").remove();
-            svg.append("g")
+            AreaSvg.selectAll(".x-axis").remove();
+            AreaSvg.append("g")
                 .attr("transform", `translate(0,${areaH - margin.bottom - margin.top})`)
                 .attr("class", "x-axis")
                 .call(d3.axisBottom(x).ticks(areaW / 80).tickSizeOuter(0).tickFormat(d3.format("d")));
         
             // Update the y-axis
-            svg.selectAll(".y-axis").remove();
-            svg.append("g")
+            AreaSvg.selectAll(".y-axis").remove();
+            AreaSvg.append("g")
                 .attr("transform", `translate(0,0)`)
                 .attr("class", "y-axis")
                 .call(d3.axisLeft(y).tickFormat(d => d + "%"));
         }
         
-        svg.append("text")
+        AreaSvg.append("text")
+        .attr("x", 0)
+        .attr("y", -40)
+        .attr("class", "addedInfo")
+        .style("fill", "hsl(207, 44%, 49%)")
+        .text("Renewable");
+
+        AreaSvg.append("text")
+        .attr("x", 0)
+        .attr("y", -25)
+        .attr("class", "addedInfo")
+        .style("fill", "hsl(207, 44%, 75%)")
+        .text("Nuclear");
+
+        AreaSvg.append("text")
+        .attr("x", 0)
+        .attr("y", -10)
+        .attr("class", "addedInfo")
+        .style("fill", "hsl(207, 44%, 90%)")
+        .text("Fossil Fuel");
+
+        AreaSvg.append("text")
         .attr("x", 0)
         .attr("y", areaH - 10)
         .attr("class", "addedInfo")

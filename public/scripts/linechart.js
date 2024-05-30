@@ -1,7 +1,8 @@
 (function () {
+
     // Set the dimensions and margins of the graph
-    const margin = { top: 40, right: 230, bottom: 60, left: 50 },
-        width = 950 - margin.left - margin.right,
+    let margin = { top: 55, right: 20, bottom: 60, left: 40 },
+        width = 370 - margin.left - margin.right,
         height = 550 - margin.top - margin.bottom;
 
     // Append the svg object to the body of the page
@@ -86,16 +87,16 @@
         observer.observe(svg.node());
 
         svg.append("line")
-            .attr("x1", 650)  // Starting x coordinate
+            .attr("x1", 290)  // Starting x coordinate
             .attr("y1", 50)  // Starting y coordinate
-            .attr("x2", 650) // Ending x coordinate
-            .attr("y2", 240) // Ending y coordinate
+            .attr("x2", 290) // Ending x coordinate
+            .attr("y2", 230) // Ending y coordinate
             .attr("stroke", "#c4c4c4") // Line color
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,5"); // Line width
 
             svg.append("text")
-            .attr("x", 610)
+            .attr("x", 250)
             .attr("y", 145)
             .attr("class", "addedInfo")
             .style("fill", "#9c9c9c")
@@ -121,15 +122,15 @@
             .call(d3.axisLeft(y).tickFormat(d => d + "%"));
 
         svg.append("text")
-            .attr("x", width + 10)
-            .attr("y", 38)
+            .attr("x", 0)
+            .attr("y", -40)
             .attr("class", "legend")
             .style("fill", "hsl(207, 44%, 75%)")
             .text("World");
 
         svg.append("text")
-            .attr("x", width + 10)
-            .attr("y", 200)
+            .attr("x", 0)
+            .attr("y", -20)
             .attr("class", "legend")
             .style("fill", "steelblue")
             .text("Sub-Saharan Africa");
