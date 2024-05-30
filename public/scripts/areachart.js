@@ -9,6 +9,8 @@
     const oceaniaBtn = document.querySelector("#oceaniaBtn");
     const europeBtn = document.querySelector("#europeBtn");
     const worldBtn = document.querySelector("#worldBtn");
+
+
     
     // Initially selected continent
     let selectedContinent = "Africa"; // Moved this line up for global access within this function
