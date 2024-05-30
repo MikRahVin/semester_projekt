@@ -8,7 +8,7 @@ const africaBtn = document.querySelector("#africaBtn");
 
 (function () {
     const margin = { top: 70, right: 30, bottom: 30, left: 60 };
-    const areaW = 370;
+    const areaW = 340;
     const areaH = 500 - margin.top;
     
     
