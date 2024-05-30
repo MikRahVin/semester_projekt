@@ -371,16 +371,16 @@ function smallLine(){
         observer.observe(lineSvg.node());
 
         lineSvg.append("line")
-            .attr("x1", 290)  // Starting x coordinate
+            .attr("x1", 280)  // Starting x coordinate
             .attr("y1", 50)  // Starting y coordinate
-            .attr("x2", 290) // Ending x coordinate
+            .attr("x2", 280) // Ending x coordinate
             .attr("y2", 230) // Ending y coordinate
             .attr("stroke", "#c4c4c4") // Line color
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,5"); // Line width
 
             lineSvg.append("text")
-            .attr("x", 250)
+            .attr("x", 240)
             .attr("y", 145)
             .attr("class", "addedInfo")
             .style("fill", "#9c9c9c")
