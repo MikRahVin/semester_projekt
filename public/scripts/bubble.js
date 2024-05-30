@@ -1,5 +1,5 @@
 //declaring all the elements that we are going to refer to later in the script ad variables. We''re using .queryselector to find the elements in our html page.
-const apiUrl = 'http://localhost:4000/energy';
+const apiUrl = 'https://renewable-electricity-in-africa.onrender.com';
 const container3 = document.querySelector("#container3");
 const solarBtn0 = document.querySelector("#solarBtn0");
 const solarBtn1 = document.querySelector("#solarBtn1");
