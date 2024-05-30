@@ -27,10 +27,6 @@ p {
     
 }
 
-span {
-    font-size: 2.5rem;
-    color: steelblue;
-}
 
 h2{
     font-size: 2.3rem;
@@ -219,7 +215,7 @@ li{
 
 .simpleText{
     font-size: larger;
-    line-height: 2rem;
+    line-height: 2.4rem;
     color: grey;
 }
 
@@ -232,6 +228,14 @@ li{
     justify-content: right;
     width: 1200px;
 }
+
+.highlight{
+    font-size: 1.7rem;
+    color: steelblue;
+    padding: 0;
+    margin: 0;
+}
+
 
 #legendContainerMid{
     display: flex;
@@ -327,10 +331,43 @@ li{
     width:1100px;
 }
 
+#lastInfoSection{
+    height: 100dvh;
+}
+
 #closingStatement{
     width: 40dvw;
+    font-size: 1.5rem;
 }
 
 #closingStatementText{
-    
+width: 40dvw;
+}
+
+#closingHeader{
+    font-size: 2.5rem;
+}
+
+#changingLives{
+    display: block;
+    padding: 2rem 0;
+}
+
+#lightBulb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+
+/* Animating the lightbulb */
+@keyframes blink {
+    0%, 100% { color: rgb(249, 249, 128); } /* Lightbulb on */
+    50% { color: rgb(233, 230, 158); }      /* Lightbulb off */
+}
+
+.fas.fa-lightbulb {
+    font-size: 50px;             /* Adjust the size as needed */
+    animation: blink 3s infinite; /* Apply the blinking animation */
 }
