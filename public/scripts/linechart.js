@@ -1,6 +1,6 @@
 (function () {
     // Set the dimensions and margins of the graph
-    const margin = { top: 40, right: 180, bottom: 60, left: 50 },
+    const margin = { top: 40, right: 230, bottom: 60, left: 50 },
         width = 950 - margin.left - margin.right,
         height = 550 - margin.top - margin.bottom;
 

@@ -8,7 +8,7 @@ const solarBtn3 = document.querySelector("#solarBtn3");
 let customSelects = document.querySelectorAll('.custom-select');
 
 // declaring height and width of our data visualization as variables, so that if we want to change them, we only need to change the values here.
-let bubbleW = 1300;
+let bubbleW = 1200;
 const bubbleH = 600;
 
 //declaring original average amount of electricity generated per capita kwh for Africa
