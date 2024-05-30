@@ -249,6 +249,9 @@ li{
     margin-right: 200px;
 }
 
+#infoHeader1{
+    margin-left: 1rem;
+}
 
 #legend, #legend2, #legend3{
     color: #9c9c9c;
