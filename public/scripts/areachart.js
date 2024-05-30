@@ -1,6 +1,6 @@
 (function () {
     const areaW = 950;
-    const areaH = 550;
+    const areaH = 500;
     const margin = { top: 20, right: 30, bottom: 30, left: 60 };
     const africaBtn = document.querySelector("#africaBtn");
     const asiaBtn = document.querySelector("#asiaBtn");
