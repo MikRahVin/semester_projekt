@@ -366,8 +366,8 @@ width: 40dvw;
 
 /* Animating the lightbulb */
 @keyframes blink {
-    0%, 100% { color: rgb(252, 252, 105); } /* Lightbulb on */
-    50% { color: rgb(233, 230, 158); }      /* Lightbulb off */
+    0%, 100% { color: hsl(60, 100%, 59%); } /* Lightbulb on */
+    50% { color: hsl(60, 50%, 59%); }      /* Lightbulb off */
 }
 
 .fas.fa-lightbulb {
