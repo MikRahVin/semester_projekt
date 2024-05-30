@@ -366,7 +366,7 @@ width: 40dvw;
 
 /* Animating the lightbulb */
 @keyframes blink {
-    0%, 100% { color: rgb(249, 249, 128); } /* Lightbulb on */
+    0%, 100% { color: rgb(252, 252, 105); } /* Lightbulb on */
     50% { color: rgb(233, 230, 158); }      /* Lightbulb off */
 }
 
