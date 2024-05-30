@@ -292,9 +292,6 @@ p {
     flex-direction: column;
 }
 
-#lastInfoSection {
-}
-
 #closingStatement {
     width: 90%;
     box-sizing: border-box;
@@ -345,3 +342,130 @@ p {
     animation: blink 3s infinite;
     /* Apply the blinking animation */
 }
+
+
+@media(min-width:999px){
+
+    .container{
+        flex-direction: row;
+    }
+    
+    .simpleTextContainer{
+        width: 40%;
+    }
+
+    #container2{
+        flex-direction: row;
+    }
+
+    #container3{
+        flex-direction: column;
+    }
+    #areaChartContainer{
+        width: 50%;
+    }
+}
+
+@media(min-width: 1200px){
+
+    h2{
+        font-size: 2rem;
+        padding: 1rem 0;
+    }
+.headerContainer{
+    width: 1000px;
+}
+    .container{
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .simpleTextContainer{
+        width:20rem;
+    }
+
+    .infoList{
+        padding: 0.2rem 0;
+    }
+
+    .infoHeaderContainer{
+        width: 1000px;
+    }
+.infoText{
+    width: 450;
+}
+
+.legendContainer{
+    width: 1000px;
+}
+
+.selectContainer{
+    width: 1000px;
+    display: flex;
+    justify-content: left;
+
+}
+
+.custom-select{
+    width: auto;
+}
+
+#areaSelect{
+    margin-left: 13rem;
+}
+
+#legendContainer1{
+    display: flex;
+    justify-content: end;
+}
+
+#legendLine{
+    width: 600px;
+}
+
+#legendArea{
+    width: 700px;
+}
+    #closingStatement
+    {
+        width: 700px;
+        font-size: 1.3rem;
+    }
+
+    #closingheader{
+        width: 700px;
+    }
+    #infoContent1{
+        width: 1000px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    #infoContent2{
+        width: 1000px;
+        flex-direction: column
+    }
+
+
+
+
+    #container2{
+        flex-direction: row;
+    }
+
+    #container3{
+        flex-direction: column;
+    }
+    #areaChartContainer{
+        width: 50%;
+    }
+
+    #lastInfoSection{
+        height: 100vh;
+    }
+
+
+    
+
+
+}
+
