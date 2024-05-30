@@ -344,31 +344,19 @@ function smallLine(){
             threshold: 0.5 // Trigger when 50% of the element is in view
         });
 
-        // Function to start animations
-        function startAnimations() {
-            animateLine(worldData, "hsl(207, 44%, 75%)"); // Animate World data line
-            animateLine(subSaharanAfricaData, "steelblue"); // Animate Sub-Saharan Africa data line
-        }
+  // Draw the World data line
+  lineSvg.append("path")
+  .datum(worldData)
+  .attr("class", "line")
+  .attr("d", line)
+  .style("stroke", "hsl(207, 44%, 75%)");
 
-        // Function to animate the line drawing
-        function animateLine(data, color) {
-            const linePath = lineSvg.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", line)
-                .style("stroke", color);
+  lineSvg.append("path")
+  .datum(subSaharanAfricaData)
+  .attr("class", "line")
+  .attr("d", line)
+  .style("stroke", "steelblue");
 
-            const totalLength = linePath.node().getTotalLength();
-            linePath.attr("stroke-dasharray", totalLength + " " + totalLength)
-                .attr("stroke-dashoffset", totalLength)
-                .transition()
-                .duration(2000)
-                .ease(d3.easeCubicOut)
-                .attr("stroke-dashoffset", 0);
-        }
-
-        // Observe the SVG container
-        observer.observe(lineSvg.node());
 
         lineSvg.append("line")
             .attr("x1", 280)  // Starting x coordinate
