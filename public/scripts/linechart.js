@@ -1,6 +1,6 @@
 (function () {
     // Set the dimensions and margins of the graph
-    const margin = { top: 40, right: 180, bottom: 60, left: 50 },
+    const margin = { top: 40, right: 230, bottom: 60, left: 50 },
         width = 950 - margin.left - margin.right,
         height = 550 - margin.top - margin.bottom;
 
@@ -86,17 +86,17 @@
         observer.observe(svg.node());
 
         svg.append("line")
-            .attr("x1", 700)  // Starting x coordinate
+            .attr("x1", 650)  // Starting x coordinate
             .attr("y1", 50)  // Starting y coordinate
-            .attr("x2", 700) // Ending x coordinate
-            .attr("y2", 260) // Ending y coordinate
+            .attr("x2", 650) // Ending x coordinate
+            .attr("y2", 240) // Ending y coordinate
             .attr("stroke", "#c4c4c4") // Line color
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,5"); // Line width
 
             svg.append("text")
-            .attr("x", 655)
-            .attr("y", 150)
+            .attr("x", 610)
+            .attr("y", 145)
             .attr("class", "addedInfo")
             .style("fill", "#9c9c9c")
             .text("42%");

@@ -15,8 +15,8 @@ body {
 
 
 h1 {
-    font-size: 3rem;
-    width: 1300px;
+    font-size: 2.3rem;
+    width: 1200px;
 
 }
 
@@ -27,14 +27,10 @@ p {
     
 }
 
-span {
-    font-size: 2.5rem;
-    color: steelblue;
-}
 
 h2{
-    font-size: 3rem;
-    width: 1300px;
+    font-size: 2.3rem;
+    width: 1200px;
 
 }
 
@@ -60,7 +56,7 @@ h1, .container, #container3 {
 
 li{
     padding: 0.5rem 0;
-    width: 1200px;
+    width: 1100px;
 }
 
 .y-axis path, .y-axis line {
@@ -145,24 +141,24 @@ li{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 1200px;
-    font-size: 1.3rem;
+    width: 1100px;
+    font-size: 1rem;
 }
 .infoHeader{
-    width: 1200px;
+    width: 1100px;
 }
 
 .infoHeader h3{
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 
 .infoText{
-    width: 600px;
+    width: 500px;
 }
 
 .infoParagraphs{
-    width: 600px;
+    width: 500px;
     text-align: left;
     margin: 0;
     padding: 0.5rem 0;
@@ -170,7 +166,7 @@ li{
    
 
 .infoParagraphs2{
-    width: 1200px;
+    width: 1100px;
     text-align: left;
     margin: 0;
     padding: 0.5rem 0;
@@ -182,7 +178,7 @@ li{
     display: flex;
     align-items: center;
     align-content: center;
-    width: 1300px;
+    width: 1200px;
     justify-content: start;
 }
 
@@ -219,23 +215,44 @@ li{
 
 .simpleText{
     font-size: larger;
-    line-height: 2rem;
+    line-height: 2.4rem;
     color: grey;
 }
 
 .info1list{
-    width: 600px;
+    width: 500px;
 }
 
-#legendContainer{
+.legendContainer{
     display: flex;
     justify-content: right;
-    width: 1300px;
+    width: 1200px;
 }
 
-#legend{
-    color: grey;
-    width: 30dvw;
+.highlight{
+    font-size: 1.7rem;
+    color: steelblue;
+    padding: 0;
+    margin: 0;
+}
+
+
+#legendContainerMid{
+    display: flex;
+    justify-content:right;
+    width:1200px;
+    margin-right: 500px;
+    max-width: 1200px;
+}
+
+#legendContainer1{
+    margin-right: 200px;
+}
+
+
+#legend, #legend2, #legend3{
+    color: #9c9c9c;
+    width: 25rem;
     margin-bottom: 1rem;
 }
 
@@ -269,7 +286,7 @@ li{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 1300px;
+    width: 1200px;
     justify-content: left;
 }
 
@@ -299,7 +316,7 @@ li{
 #infoContent2{
     display: flex;
     flex-direction: column;
-    width: 1200px;
+    width: 1100px;
 
 }
 
@@ -311,5 +328,46 @@ li{
 }
 
 #infoHeader1{
-    width:1200px;
+    width:1100px;
+}
+
+#lastInfoSection{
+    height: 100dvh;
+}
+
+#closingStatement{
+    width: 40dvw;
+    font-size: 1.5rem;
+}
+
+#closingStatementText{
+width: 40dvw;
+}
+
+#closingHeader{
+    font-size: 2.5rem;
+}
+
+#changingLives{
+    display: block;
+    padding: 2rem 0;
+}
+
+#lightBulb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+
+/* Animating the lightbulb */
+@keyframes blink {
+    0%, 100% { color: rgb(249, 249, 128); } /* Lightbulb on */
+    50% { color: rgb(233, 230, 158); }      /* Lightbulb off */
+}
+
+.fas.fa-lightbulb {
+    font-size: 50px;             /* Adjust the size as needed */
+    animation: blink 3s infinite; /* Apply the blinking animation */
 }
