@@ -5,94 +5,84 @@
 }
 
 
+html,
 body {
-    width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
-
-
 h1 {
-    font-size: 2.3rem;
-    width: 1200px;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    width: 90%;
+    box-sizing: border-box;
+    font-weight: 400;
 
+}
+
+h2 {
+    box-sizing: border-box;
+    margin: 0;
+    width: 90%;
+}
+
+h3 {
+    font-size: 1.5rem;
+    box-sizing: border-box;
 }
 
 p {
-    margin: 1rem;
-    width: 20rem;
-    
-    
+    box-sizing: border-box;
+    margin: 0;
 }
 
 
-h2{
-    font-size: 2.3rem;
-    width: 1200px;
 
-}
-
-h3{
-    font-size: 1.3rem;
-    width: 600px;
-    max-width: 600px ;
-}
-
-select{
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    font-size: larger;
-    border: none;
-    background-color: whitesmoke;
-    margin: 15px;
-    box-shadow: 2px 2px 15px #c2c2c2;
-}
-
-h1, .container, #container3 {
-    max-width: 100%;
-}
-
-li{
-    padding: 0.5rem 0;
-    width: 1100px;
-}
-
-.y-axis path, .y-axis line {
-    stroke: #9c9c9c; /* Change the color of the axis line */
+.y-axis path,
+.y-axis line {
+    stroke: #9c9c9c;
+    /* Change the color of the axis line */
 }
 
 .y-axis text {
-    fill: #9c9c9c; /* Change the color of the axis labels */
+    fill: #9c9c9c;
+    /* Change the color of the axis labels */
 }
-.x-axis path, .x-axis line {
-    stroke: #9c9c9c; /* Change the color of the axis line */
+
+.x-axis path,
+.x-axis line {
+    stroke: #9c9c9c;
+    /* Change the color of the axis line */
 }
 
 .x-axis text {
-    fill: #9c9c9c; /* Change the color of the axis labels */
+    fill: #9c9c9c;
+    /* Change the color of the axis labels */
 }
 
-.infoSection, #blackout {
-    width: 100vw;
-}
 
 .custom-select {
     position: relative;
     display: inline-block;
-    margin: 15px;
     box-shadow: 2px 2px 15px #c2c2c2;
     border-radius: 8px;
-}
- 
-.select-selected {
-    background-color: whitesmoke;
-    color: #333333;
+    box-sizing: border-box;
+    margin: 0;
+    width: 80%;
     padding: 1rem 2rem;
-    cursor: pointer;
 }
- 
+
+.select-selected {
+    
+    color: #333333;
+    cursor: pointer;
+
+}
+
 /* Style the dropdown items */
 .select-items {
     position: absolute;
@@ -101,29 +91,35 @@ li{
     box-shadow: 2px 2px 15px #c2c2c2;
     border-radius: 4px;
     z-index: 1;
-    width: 100%;
+    width: 80%;
 }
- 
+
 /* Style the dropdown items */
 .select-items div {
     padding: 1rem;
     cursor: pointer;
     text-align: center;
 }
- 
+
 /* Style the dropdown items on hover */
 .select-items div:hover {
     background-color: #ececec;
 }
 
+.selectContainer{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
 .fullPage {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     padding: 4rem 0;
-    margin: 5rem 0;
 }
 
 .infoSection {
@@ -139,62 +135,67 @@ li{
 
 .infoContent{
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 1100px;
-    font-size: 1rem;
-}
-.infoHeader{
-    width: 1100px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
 }
 
-.infoHeader h3{
-    font-size: 1.8rem;
-}
-
-
-.infoText{
-    width: 500px;
-}
-
-.infoParagraphs{
-    width: 500px;
-    text-align: left;
+.infoHeaderContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
     margin: 0;
-    padding: 0.5rem 0;
 }
-   
 
-.infoParagraphs2{
-    width: 1100px;
-    text-align: left;
+.infoList {
+    display: block;
+    width: 90%;
+    box-sizing: border-box;
     margin: 0;
-    padding: 0.5rem 0;
-    
-   
+    padding: 1rem 0;
+
+}
+
+.infoText {
+    width: 90%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.infoParagraphs {
+    width: 90%;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    align-content: center;
-    width: 1200px;
-    justify-content: start;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+.container svg {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.headerContainer {
+    width: 90%;
+    padding: 2rem 0;
 }
 
 .line {
     fill: none;
     stroke-width: 7px;
 }
-.legend {
-    font-size: 12px;
-}
 
-.Chart-title {
-    font-size: 16px;
-    font-weight: bold;
-    text-anchor: middle;
-}
 
 .tooltip {
     position: absolute;
@@ -209,54 +210,49 @@ li{
     font-size: 12px;
 }
 
-.instructions{
-    background-color: blue;
-}
 
-.simpleText{
+.simpleText {
     font-size: larger;
     line-height: 2.4rem;
     color: grey;
+    box-sizing: border-box;
+    margin: 0;
+    width: 90%;
 }
 
-.info1list{
-    width: 500px;
-}
-
-.legendContainer{
+.simpleTextContainer {
     display: flex;
-    justify-content: right;
-    width: 1200px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 0;
 }
 
-.highlight{
+.highlight {
     font-size: 1.7rem;
     color: steelblue;
     padding: 0;
     margin: 0;
 }
 
-
-#legendContainerMid{
-    display: flex;
-    justify-content:right;
-    width:1200px;
-    margin-right: 500px;
-    max-width: 1200px;
+.legendContainer {
+    box-sizing: border-box;
+    margin: 0;
+    width: 90%;
 }
 
-#legendContainer1{
-    margin-right: 200px;
-}
-
-#infoHeader1{
-    margin-left: 1rem;
-}
-
-#legend, #legend2, #legend3{
+.legend {
     color: #9c9c9c;
-    width: 25rem;
-    margin-bottom: 1rem;
+}
+
+.addedInfo {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+
+#container2 {
+    flex-direction: column-reverse;
 }
 
 #blackout {
@@ -267,31 +263,11 @@ li{
     background-color: black;
     width: 100%;
     height: 100dvh;
-    margin: 0;
-    padding: 0;
-    top: 0;
-}
-
-#blackout p {
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    width: 100%;
-    margin: 2rem 0;
 
 }
 
-#container1{
-    justify-content: center;
-}
 
-#container3 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 1200px;
-    justify-content: left;
-}
+
 
 #container3 svg {
     align-content: center;
@@ -299,64 +275,44 @@ li{
     margin: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 15px #c2c2c2;
-    padding: 0.5rem;
 
 }
-#container3 p{
+
+#areaChartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+#infoContent2 {
+    display: flex;
+    flex-direction: column;
+}
+
+#closingStatement {
+    width: 90%;
+    box-sizing: border-box;
     margin: 0;
 }
 
-#areaChartContainer{
-    display: flex;
-    flex-direction: column;
-}
 
-#container2{
-    justify-content: space-evenly;
-}
-
-
-#infoContent2{
-    display: flex;
-    flex-direction: column;
-    width: 1100px;
-
-}
-
-#education{
-    padding-right: 1.5rem;
-}
-#health{
-    padding-left: 1.5rem;
-}
-
-#infoHeader1{
-    width:1100px;
-}
-
-#lastInfoSection{
-    height: 100dvh;
-}
-
-#closingStatement{
-    width: 40dvw;
-    font-size: 1.5rem;
-}
-
-#closingStatementText{
-width: 40dvw;
-}
-
-#closingHeader{
-    font-size: 2.5rem;
-}
-
-#changingLives{
-    display: block;
+#closingStatementText {
     padding: 2rem 0;
 }
 
-#lightBulb{
+
+#transformingLives {
+    display: block;
+    padding: 3rem 0;
+    color: steelblue;
+    font-weight: 700;
+    width: 100%;
+}
+
+#lightBulb {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -366,11 +322,150 @@ width: 40dvw;
 
 /* Animating the lightbulb */
 @keyframes blink {
-    0%, 100% { color: rgb(252, 252, 105); } /* Lightbulb on */
-    50% { color: rgb(233, 230, 158); }      /* Lightbulb off */
+
+    0%,
+    100% {
+        color: hsl(60, 100%, 59%);
+    }
+
+    /* Lightbulb on */
+    50% {
+        color: hsl(60, 50%, 59%);
+    }
+
+    /* Lightbulb off */
 }
 
 .fas.fa-lightbulb {
-    font-size: 50px;             /* Adjust the size as needed */
-    animation: blink 3s infinite; /* Apply the blinking animation */
+    font-size: 50px;
+    /* Adjust the size as needed */
+    animation: blink 3s infinite;
+    /* Apply the blinking animation */
 }
+
+
+@media(min-width:999px){
+
+    .container{
+        flex-direction: row;
+    }
+    
+    .simpleTextContainer{
+        width: 40%;
+    }
+
+    #container2{
+        flex-direction: row;
+    }
+
+    #container3{
+        flex-direction: column;
+    }
+    #areaChartContainer{
+        width: 50%;
+    }
+}
+
+@media(min-width: 1200px){
+
+    h2{
+        font-size: 2rem;
+        padding: 1rem 0;
+    }
+.headerContainer{
+    width: 1000px;
+}
+    .container{
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .simpleTextContainer{
+        width:20rem;
+    }
+
+    .infoList{
+        padding: 0.2rem 0;
+    }
+
+    .infoHeaderContainer{
+        width: 1000px;
+    }
+.infoText{
+    width: 450;
+}
+
+.legendContainer{
+    width: 1000px;
+}
+
+.selectContainer{
+    width: 1000px;
+    display: flex;
+    justify-content: left;
+
+}
+
+.custom-select{
+    width: auto;
+}
+
+#areaSelect{
+    margin-left: 13rem;
+}
+
+#legendContainer1{
+    display: flex;
+    justify-content: end;
+}
+
+#legendLine{
+    width: 600px;
+}
+
+#legendArea{
+    width: 700px;
+}
+    #closingStatement
+    {
+        width: 700px;
+        font-size: 1.3rem;
+    }
+
+    #closingheader{
+        width: 700px;
+    }
+    #infoContent1{
+        width: 1000px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    #infoContent2{
+        width: 1000px;
+        flex-direction: column
+    }
+
+
+
+
+    #container2{
+        flex-direction: row;
+    }
+
+    #container3{
+        flex-direction: column;
+    }
+    #areaChartContainer{
+        width: 50%;
+    }
+
+    #lastInfoSection{
+        height: 100vh;
+    }
+
+
+    
+
+
+}
+
